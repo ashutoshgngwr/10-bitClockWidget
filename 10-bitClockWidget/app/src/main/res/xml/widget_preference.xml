@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidUnknownAttribute -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/appearance">
+
+        <ListPreference
+            android:key="dot_size"
+            android:title="@string/dot_size"
+            android:entries="@array/pref_dot_size"
+            android:entryValues="@array/pref_dot_size_values"
+            android:defaultValue="10" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="am_color"
+            android:title="@string/am_time_color"
+            android:summary="@string/summary_am_time_color"
+            android:defaultValue="#FFFFFFFF"
+            alphaSlider="true" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="pm_color"
+            android:title="@string/pm_time_color"
+            android:summary="@string/summary_pm_time_color"
+            android:defaultValue="#FF000000"
+            alphaSlider="true" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="background_color"
+            android:title="@string/clock_background_color"
+            android:defaultValue="#00000000"
+            alphaSlider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/misc_options">
+
+        <ListPreference
+            android:key="update_frequency"
+            android:title="@string/clock_update_frequency"
+            android:entries="@array/pref_update_frequency"
+            android:entryValues="@array/pref_update_frequency_values"
+            android:defaultValue="15000" />
+
+        <CheckBoxPreference
+            android:key="display_separator"
+            android:title="@string/display_separator"
+            android:summary="@string/summary_display_separator"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/extras">
+
+        <Preference
+            android:key="help"
+            android:title="@string/help" />
+
+        <Preference
+            android:key="about"
+            android:title="@string/about" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
