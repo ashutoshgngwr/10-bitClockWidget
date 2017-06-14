@@ -16,20 +16,20 @@
             android:key="am_color"
             android:title="@string/am_time_color"
             android:summary="@string/summary_am_time_color"
-            android:defaultValue="#FFFFFFFF"
+            android:defaultValue="#FF196D00"
             alphaSlider="true" />
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="pm_color"
             android:title="@string/pm_time_color"
             android:summary="@string/summary_pm_time_color"
-            android:defaultValue="#FF000000"
+            android:defaultValue="#FF1D5BC5"
             alphaSlider="true" />
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="background_color"
             android:title="@string/clock_background_color"
-            android:defaultValue="#00000000"
+            android:defaultValue="#D0F5D139"
             alphaSlider="true" />
 
     </PreferenceCategory>
