@@ -5,7 +5,10 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 
@@ -28,6 +31,9 @@ public class ClockWidgetUpdateService extends IntentService {
         widgetManager.updateAppWidget(intent.getIntArrayExtra("ids"), remoteViews);
     }
 
+    // Bitmap scaling factor to compensate for larger widget size
+    private static final float BITMAP_SCALE = 1.5F;
+
     private Bitmap createClockBitmap() {
         // get current time in 12-hour format
         Calendar c = Calendar.getInstance();
@@ -35,8 +41,9 @@ public class ClockWidgetUpdateService extends IntentService {
         int hour = c.get(Calendar.HOUR), minute = c.get(Calendar.MINUTE),
                 am_pm = c.get(Calendar.AM_PM);
 
-        int width = Math.round(getResources().getDimension(R.dimen.widget_width)),
-            height = Math.round(getResources().getDimension(R.dimen.widget_height)),
+        // scale width & height here and all other DIP values will be scaled in px() function
+        int width = Math.round(getResources().getDimension(R.dimen.widget_width) * BITMAP_SCALE),
+            height = Math.round(getResources().getDimension(R.dimen.widget_height) * BITMAP_SCALE),
             dot_radius = px(ClockWidgetSettings.getDotSize()), // get dot radius as set by user
             dot_size = dot_radius * 2,
             // dotSpacingX = (totalwidth - size of 5 dots + 5px (separator width + padding)) / 5
@@ -49,10 +56,13 @@ public class ClockWidgetUpdateService extends IntentService {
         Bitmap clockBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(clockBitmap);
-        canvas.drawColor(ClockWidgetSettings.getClockBackgroundColor()); // set clock's background color.
 
         Paint p = new Paint();
         p.setAntiAlias(true);
+
+        // set clock's background color.
+        p.setColor(ClockWidgetSettings.getClockBackgroundColor());
+        canvas.drawRoundRect(new RectF(0, 0, width - 1, height - 1), px(5), px(5), p);
 
         // set clock's color based on time.
         p.setColor(am_pm == Calendar.AM ?
@@ -104,6 +114,6 @@ public class ClockWidgetUpdateService extends IntentService {
 
     private int px(int dp) {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                getResources().getDisplayMetrics()));
+                getResources().getDisplayMetrics()) * BITMAP_SCALE);
     }
 }
