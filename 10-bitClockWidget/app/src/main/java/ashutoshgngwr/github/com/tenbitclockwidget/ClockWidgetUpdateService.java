@@ -5,10 +5,8 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 

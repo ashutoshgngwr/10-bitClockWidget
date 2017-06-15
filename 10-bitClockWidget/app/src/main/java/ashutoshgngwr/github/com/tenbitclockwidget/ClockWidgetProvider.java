@@ -18,6 +18,7 @@ public class ClockWidgetProvider extends BroadcastReceiver {
         switch(intent.getAction()) {
             case AppWidgetManager.ACTION_APPWIDGET_ENABLED: // Update clock when widget is enabled.
             case AppWidgetManager.ACTION_APPWIDGET_UPDATE: // Update clock when update is requested.
+            case Intent.ACTION_TIME_CHANGED: // Update clock when system time is changed.
             case ACTION_UPDATE_CLOCK:
                 onUpdate(context);
                 break;
@@ -34,6 +35,9 @@ public class ClockWidgetProvider extends BroadcastReceiver {
         // get widget ids for all available instances
         int ids[] = widgetManager.getAppWidgetIds(
                 new ComponentName(context.getPackageName(), getClass().getName()));
+
+        if(ids.length == 0)
+            return; // No widget is added to home screen. No need to update.
 
         // start update service
         Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
