@@ -6,5 +6,6 @@
     android:minResizeHeight="@dimen/widget_height"
     android:minResizeWidth="@dimen/widget_width"
     android:updatePeriodMillis="0"
-    android:resizeMode="horizontal|vertical" >
+    android:resizeMode="horizontal|vertical"
+    android:configure="ashutoshgngwr.github.com.tenbitclockwidget.ClockWidgetPreferenceActivity" >
 </appwidget-provider>
