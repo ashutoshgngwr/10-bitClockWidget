@@ -31,6 +31,13 @@ import java.util.Calendar;
 
 public class ClockWidgetUpdateService extends IntentService {
 
+    // Bitmap scaling factor to compensate for larger widget size
+    private static final float BITMAP_SCALE = 1.5F;
+
+    private static final int BIT_ALPHA_ACTIVE = 0xFF;
+    private static final int BIT_ALPHA_INACTIVE = 0x80;
+    private static final int SEPARATOR_LINE_ALPHA = 0x70;
+
     public ClockWidgetUpdateService() {
         super("ClockWidgetUpdateService");
     }
@@ -45,9 +52,6 @@ public class ClockWidgetUpdateService extends IntentService {
 
         widgetManager.updateAppWidget(intent.getIntArrayExtra("ids"), remoteViews);
     }
-
-    // Bitmap scaling factor to compensate for larger widget size
-    private static final float BITMAP_SCALE = 1.5F;
 
     private Bitmap createClockBitmap() {
         // get current time in 12-hour format
@@ -74,6 +78,7 @@ public class ClockWidgetUpdateService extends IntentService {
 
         Paint p = new Paint();
         p.setAntiAlias(true);
+        p.setStyle(Paint.Style.FILL);
 
         // set clock's background color.
         p.setColor(ClockWidgetSettings.getClockBackgroundColor());
@@ -85,9 +90,9 @@ public class ClockWidgetUpdateService extends IntentService {
 
         for(int i = 0; i < 4; i++) {
             if((hour >> i & 1) == 1)
-                p.setStyle(Paint.Style.FILL);
+                p.setAlpha(BIT_ALPHA_ACTIVE);
             else
-                p.setStyle(Paint.Style.STROKE);
+                p.setAlpha(BIT_ALPHA_INACTIVE);
 
             // cx = paddingX + (width + spacing of previous dots) + radius of current dot
             // cy = paddingY + radius of dot [for line 1],
@@ -102,9 +107,9 @@ public class ClockWidgetUpdateService extends IntentService {
 
         for(int i = 0; i < 6; i++) {
             if((minute >> i & 1) == 1)
-                p.setStyle(Paint.Style.FILL);
+                p.setAlpha(BIT_ALPHA_ACTIVE);
             else
-                p.setStyle(Paint.Style.STROKE);
+                p.setAlpha(BIT_ALPHA_INACTIVE);
 
             // cx = marginX + (width + spacing of previous dots) + radius of current dot.
             // cy = paddingY + radius of dot [for line 1]
@@ -117,7 +122,7 @@ public class ClockWidgetUpdateService extends IntentService {
         if(ClockWidgetSettings.shouldDisplaySeparator()) {
             float x1 = paddingX + dot_size * 2 + dotSpacingX * 1.5F + px(2);
 
-            p.setAlpha(0x70);
+            p.setAlpha(SEPARATOR_LINE_ALPHA);
 
             // from center-axis of line 1's dot to center-axis of line 2's dot
             canvas.drawLine(x1, paddingY + dot_radius, x1,
