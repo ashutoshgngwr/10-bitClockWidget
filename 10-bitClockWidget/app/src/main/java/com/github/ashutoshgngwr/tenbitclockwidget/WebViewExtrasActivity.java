@@ -15,7 +15,7 @@
  *
  */
 
-package ashutoshgngwr.github.com.tenbitclockwidget;
+package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;

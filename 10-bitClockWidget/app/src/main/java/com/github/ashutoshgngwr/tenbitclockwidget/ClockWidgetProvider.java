@@ -15,7 +15,7 @@
  *
  */
 
-package ashutoshgngwr.github.com.tenbitclockwidget;
+package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

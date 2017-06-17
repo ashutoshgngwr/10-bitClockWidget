@@ -15,7 +15,7 @@
  *
  */
 
-package ashutoshgngwr.github.com.tenbitclockwidget;
+package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.app.Application;
 import android.content.Context;

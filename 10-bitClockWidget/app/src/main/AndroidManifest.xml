@@ -15,7 +15,7 @@
   ~
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ashutoshgngwr.github.com.tenbitclockwidget">
+    package="com.github.ashutoshgngwr.tenbitclockwidget">
 
     <application
         android:name=".ClockWidgetApplication"

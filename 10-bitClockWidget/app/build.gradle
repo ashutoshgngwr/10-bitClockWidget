@@ -21,7 +21,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "ashutoshgngwr.github.com.tenbitclockwidget"
+        applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 10
