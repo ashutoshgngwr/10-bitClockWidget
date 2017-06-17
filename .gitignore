@@ -20,3 +20,6 @@ local.properties
 .idea
 .gradle
 build/
+
+#java keystore files
+*.jks

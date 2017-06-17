@@ -24,12 +24,12 @@ android {
         applicationId "ashutoshgngwr.github.com.tenbitclockwidget"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
+        versionCode 10
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
