@@ -5,7 +5,7 @@
 
 <img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/extras/widget_info.png" title="Widget Information" alt="widget info" width="300"/>
 
-<img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/extras/screenshot_1.png" title="Screenshot" alt="screenshot" width="200"/>  <img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/extras/screenshot_2.png" title="Screenshot" alt="screenshot" width="200"/>
+<img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/extras/screenshot_1.png" title="Screenshot" alt="screenshot" width="200"/>  <img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/extras/screenshot_2.png" title="Screenshot" alt="screenshot" width="250"/>
 
 ## Download
 You can download the latest release [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases/latest). All other versions including latest release, are available [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases).
