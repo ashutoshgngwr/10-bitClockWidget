@@ -18,6 +18,7 @@
 package ashutoshgngwr.github.com.tenbitclockwidget;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -25,7 +26,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 public class ClockWidgetPreferenceFragment extends PreferenceFragment
-        implements SharedPreferences.OnSharedPreferenceChangeListener{
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,32 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragment
         ListPreference updateFrequency = (ListPreference) findPreference("update_frequency");
         updateFrequency.setSummary(updateFrequency.getEntry());
 
+        Preference about = findPreference("about");
+        about.setOnPreferenceClickListener(extrasPreferenceClickListener);
+
+        Preference help = findPreference("help");
+        help.setOnPreferenceClickListener(extrasPreferenceClickListener);
     }
+
+    private Preference.OnPreferenceClickListener extrasPreferenceClickListener
+            = new Preference.OnPreferenceClickListener() {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            Intent activityIntent = new Intent(getActivity(), WebViewExtrasActivity.class);
+
+            switch(preference.getKey()) {
+                case "about":
+                    activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "about.html");
+                    break;
+                case "help":
+                    activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "help.html");
+                    break;
+            }
+
+            startActivity(activityIntent);
+            return true;
+        }
+    };
 
     // Listening for changes in SharedPreferences to get updated values of ListPreference.
     // Adding OnPreferenceChangeListener gives old value for ListPreference#getEntry()
