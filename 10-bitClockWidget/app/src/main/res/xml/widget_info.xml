@@ -24,5 +24,6 @@
     android:minResizeWidth="@dimen/widget_width"
     android:updatePeriodMillis="0"
     android:resizeMode="horizontal|vertical"
-    android:configure="ashutoshgngwr.github.com.tenbitclockwidget.ClockWidgetPreferenceActivity" >
+    android:configure="ashutoshgngwr.github.com.tenbitclockwidget.ClockWidgetPreferenceActivity"
+    android:previewImage="@drawable/preview">
 </appwidget-provider>
