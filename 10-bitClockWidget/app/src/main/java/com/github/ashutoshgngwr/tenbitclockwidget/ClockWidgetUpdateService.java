@@ -65,11 +65,9 @@ public class ClockWidgetUpdateService extends IntentService {
             height = Math.round(getResources().getDimension(R.dimen.widget_height) * BITMAP_SCALE),
             dot_radius = px(ClockWidgetSettings.getDotSize()), // get dot radius as set by user
             dot_size = dot_radius * 2,
-            // dotSpacingX = (totalwidth - size of 5 dots + 5px (separator width + padding)) / 5
+            // dotSpacingX = spacing between 4 columns + left & right padding
             dotSpacingX = (width - dot_size * 5 - px(5)) / 6,
-            paddingX = dotSpacingX, // use spacing between dots as left and right padding.
-            dotSpacingY = (height - dot_size * 2) / 3,
-            paddingY = dotSpacingY; // calculated in same manner as paddingX
+            dotSpacingY = (height - dot_size * 2) / 3; // same as X
 
         // create a bitmap of widget's size
         Bitmap clockBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -97,13 +95,13 @@ public class ClockWidgetUpdateService extends IntentService {
             // cx = paddingX + (width + spacing of previous dots) + radius of current dot
             // cy = paddingY + radius of dot [for line 1],
             // cy = paddingY + radius of dot + height of line 1 + dotSpacingY [for line 2]
-            canvas.drawCircle(paddingX + (1 - i % 2) * (dot_size + dotSpacingX) + dot_radius,
-                    paddingY + dot_radius + (i / 2 == 0 ? dotSpacingY + dot_size : 0),
+            canvas.drawCircle(dotSpacingX + (1 - i % 2) * (dot_size + dotSpacingX) + dot_radius,
+                    dotSpacingY + dot_radius + (i / 2 == 0 ? dotSpacingY + dot_size : 0),
                     dot_radius, p);
         }
 
         // cx = padding + width of 2 dots + spacing of 2 dots + 5dp (separator padding + width)
-        int marginX = paddingX + (dot_size + dotSpacingX) * 2 + px(5);
+        int marginX = dotSpacingX + (dot_size + dotSpacingX) * 2 + px(5);
 
         for(int i = 0; i < 6; i++) {
             if((minute >> i & 1) == 1)
@@ -115,18 +113,18 @@ public class ClockWidgetUpdateService extends IntentService {
             // cy = paddingY + radius of dot [for line 1]
             // cy = paddingY + radius of dot + height of line 1 + dotSpacingY [for line 2]
             canvas.drawCircle(marginX + (2 - i % 3) * (dot_size + dotSpacingX) + dot_radius,
-                    paddingY + dot_radius + (i / 3 == 0 ? dotSpacingY + dot_size : 0),
+                    dotSpacingY + dot_radius + (i / 3 == 0 ? dotSpacingY + dot_size : 0),
                     dot_radius, p);
         }
 
         if(ClockWidgetSettings.shouldDisplaySeparator()) {
-            float x1 = paddingX + dot_size * 2 + dotSpacingX * 1.5F + px(2);
+            float x1 = dotSpacingX + dot_size * 2 + dotSpacingX * 1.5F + px(2);
 
             p.setAlpha(SEPARATOR_LINE_ALPHA);
 
             // from center-axis of line 1's dot to center-axis of line 2's dot
-            canvas.drawLine(x1, paddingY + dot_radius, x1,
-                    paddingY + dot_radius + dotSpacingY + dot_size, p);
+            canvas.drawLine(x1, dotSpacingY + dot_radius, x1,
+                    dotSpacingY + dot_radius + dotSpacingY + dot_size, p);
         }
 
         return clockBitmap;
