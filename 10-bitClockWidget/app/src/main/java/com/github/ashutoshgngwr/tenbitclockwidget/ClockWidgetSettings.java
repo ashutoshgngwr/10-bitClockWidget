@@ -22,6 +22,8 @@ import android.preference.PreferenceManager;
 
 public class ClockWidgetSettings {
 
+    private static SharedPreferences sharedPreferencesInstance;
+
     protected static int getDotSize() {
         return Integer.parseInt(getPreferences().getString("dot_size", "0"));
     }
@@ -47,6 +49,11 @@ public class ClockWidgetSettings {
     }
 
     private static SharedPreferences getPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(ClockWidgetApplication.getContext());
+        if(sharedPreferencesInstance == null) {
+            sharedPreferencesInstance = PreferenceManager.getDefaultSharedPreferences(
+                    ClockWidgetApplication.getContext());
+        }
+
+        return sharedPreferencesInstance;
     }
 }

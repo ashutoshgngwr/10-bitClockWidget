@@ -54,7 +54,7 @@ public class ClockWidgetProvider extends BroadcastReceiver {
                 new ComponentName(context.getPackageName(), getClass().getName()));
 
         if(ids.length == 0)
-            return; // No widget is added to home screen. No need to update.
+            return; // No widget is added to home screen. Bailing out!
 
         // start update service
         Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);

@@ -39,7 +39,7 @@ public class ClockWidgetPreferenceActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        // send update broadcast to ClockWidgetProvider
+        // PreferenceActivity is no longer in foreground. Update widget!
         sendBroadcast(new Intent(ClockWidgetProvider.ACTION_UPDATE_CLOCK));
     }
 }
