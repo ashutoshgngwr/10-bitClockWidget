@@ -31,4 +31,11 @@
 	<string name="pm_time_color">P.M. time color</string>
 	<string name="summary_pm_time_color">Clock\'s color after midday</string>
 	<string name="clock_background_color">Clock\'s background color</string>
+	<string name="msg_update_available">New updates are available.</string>
+	<string name="download">Download (GitHub)</string>
+	<string name="check_updates">Check updates</string>
+	<string name="summary_checking_updates">Searching for updates...</string>
+	<string name="summary_no_updates_available">You are already on latest version!</string>
+	<string name="summary_updates_available">Updates are available! Tap to download updates from GitHub.</string>
+	<string name="summary_connection_error">Unable to connect to internet.</string>
 </resources>
