@@ -34,7 +34,7 @@
 	<string name="msg_update_available">New updates are available.</string>
 	<string name="download">Download (GitHub)</string>
 	<string name="check_updates">Check updates</string>
-	<string name="summary_checking_updates">Searching for updates...</string>
+	<string name="summary_checking_updates">Searching for updates…</string>
 	<string name="summary_no_updates_available">You are already on latest version!</string>
 	<string name="summary_updates_available">Updates are available! Tap to download updates from GitHub.</string>
 	<string name="summary_connection_error">Unable to connect to internet.</string>
