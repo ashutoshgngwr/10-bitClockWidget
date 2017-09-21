@@ -19,67 +19,67 @@
 <!--suppress AndroidUnknownAttribute -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="@string/appearance">
+	<PreferenceCategory
+		android:title="@string/appearance">
 
-        <ListPreference
-            android:key="dot_size"
-            android:title="@string/dot_size"
-            android:entries="@array/pref_dot_size"
-            android:entryValues="@array/pref_dot_size_values"
-            android:defaultValue="10" />
+		<ListPreference
+			android:defaultValue="10"
+			android:entries="@array/pref_dot_size"
+			android:entryValues="@array/pref_dot_size_values"
+			android:key="dot_size"
+			android:title="@string/dot_size"/>
 
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-            android:key="am_color"
-            android:title="@string/am_time_color"
-            android:summary="@string/summary_am_time_color"
-            android:defaultValue="#FF0F0F0F"
-            alphaSlider="true" />
+		<net.margaritov.preference.colorpicker.ColorPickerPreference
+			alphaSlider="true"
+			android:defaultValue="#FF0F0F0F"
+			android:key="am_color"
+			android:summary="@string/summary_am_time_color"
+			android:title="@string/am_time_color"/>
 
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-            android:key="pm_color"
-            android:title="@string/pm_time_color"
-            android:summary="@string/summary_pm_time_color"
-            android:defaultValue="#FFFCFCFC"
-            alphaSlider="true" />
+		<net.margaritov.preference.colorpicker.ColorPickerPreference
+			alphaSlider="true"
+			android:defaultValue="#FFFCFCFC"
+			android:key="pm_color"
+			android:summary="@string/summary_pm_time_color"
+			android:title="@string/pm_time_color"/>
 
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-            android:key="background_color"
-            android:title="@string/clock_background_color"
-            android:defaultValue="#00000000"
-            alphaSlider="true" />
+		<net.margaritov.preference.colorpicker.ColorPickerPreference
+			alphaSlider="true"
+			android:defaultValue="#00000000"
+			android:key="background_color"
+			android:title="@string/clock_background_color"/>
 
-    </PreferenceCategory>
+	</PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/misc_options">
+	<PreferenceCategory
+		android:title="@string/misc_options">
 
-        <ListPreference
-            android:key="update_frequency"
-            android:title="@string/clock_update_frequency"
-            android:entries="@array/pref_update_frequency"
-            android:entryValues="@array/pref_update_frequency_values"
-            android:defaultValue="15000" />
+		<ListPreference
+			android:defaultValue="15000"
+			android:entries="@array/pref_update_frequency"
+			android:entryValues="@array/pref_update_frequency_values"
+			android:key="update_frequency"
+			android:title="@string/clock_update_frequency"/>
 
-        <CheckBoxPreference
-            android:key="display_separator"
-            android:title="@string/display_separator"
-            android:summary="@string/summary_display_separator"
-            android:defaultValue="true" />
+		<CheckBoxPreference
+			android:defaultValue="true"
+			android:key="display_separator"
+			android:summary="@string/summary_display_separator"
+			android:title="@string/display_separator"/>
 
-    </PreferenceCategory>
+	</PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/extras">
+	<PreferenceCategory
+		android:title="@string/extras">
 
-        <Preference
-            android:key="help"
-            android:title="@string/help" />
+		<Preference
+			android:key="help"
+			android:title="@string/help"/>
 
-        <Preference
-            android:key="about"
-            android:title="@string/about" />
+		<Preference
+			android:key="about"
+			android:title="@string/about"/>
 
-    </PreferenceCategory>
+	</PreferenceCategory>
 
 </PreferenceScreen>

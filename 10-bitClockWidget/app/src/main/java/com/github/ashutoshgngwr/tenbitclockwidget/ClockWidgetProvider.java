@@ -20,67 +20,65 @@ package com.github.ashutoshgngwr.tenbitclockwidget;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.content.BroadcastReceiver;
+import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-public class ClockWidgetProvider extends BroadcastReceiver {
+public class ClockWidgetProvider extends AppWidgetProvider {
 
-    protected static final String ACTION_UPDATE_CLOCK = "tenbitclockwidget.clock_update";
-    private static final int REQUEST_CODE = 0x012F;
+	private static final int REQUEST_CODE = 0x19d;
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        switch(intent.getAction()) {
-            case AppWidgetManager.ACTION_APPWIDGET_ENABLED: // Update clock when widget is enabled.
-            case AppWidgetManager.ACTION_APPWIDGET_UPDATE: // Update clock when update is requested.
-            case Intent.ACTION_TIME_CHANGED: // Update clock when system time is changed.
-            case ACTION_UPDATE_CLOCK:
-                onUpdate(context);
-                break;
-            case AppWidgetManager.ACTION_APPWIDGET_DISABLED:
-                onDisabled(context);
-                break;
-        }
-    }
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()))
+			onUpdate(context, AppWidgetManager.getInstance(context), null);
+		else
+			super.onReceive(context, intent);
+	}
 
-    private void onUpdate(Context context) {
-        // Send widget ids to ClockWidgetUpdateService via Intent
-        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+	@Override
+	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int appWidgetIds[]) {
+		// get widget ids for all available instances
+		int ids[] = appWidgetManager.getAppWidgetIds(
+				new ComponentName(context.getPackageName(), getClass().getName()));
 
-        // get widget ids for all available instances
-        int ids[] = widgetManager.getAppWidgetIds(
-                new ComponentName(context.getPackageName(), getClass().getName()));
+		if (ids.length == 0)
+			return; // No widget is added to home screen. Bailing out!
 
-        if(ids.length == 0)
-            return; // No widget is added to home screen. Bailing out!
+		// start update service
+		Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
+		serviceIntent.putExtra("ids", ids);
+		context.startService(serviceIntent);
 
-        // start update service
-        Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
-        serviceIntent.putExtra("ids", ids);
-        context.startService(serviceIntent);
+		setUpdateAlarm(context);
+	}
 
-        // set alarm for next update
-        setUpdateAlarm(context);
-    }
+	@Override
+	public void onEnabled(Context context) {
+		onUpdate(context, AppWidgetManager.getInstance(context), null);
+	}
 
-    private void onDisabled(Context context) {
-        // Cancel all existing alarms for clock update.
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(createClockUpdateIntent(context));
-    }
+	@Override
+	public void onDisabled(Context context) {
+		// Cancel all existing alarms for clock update.
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.cancel(createClockUpdateIntent(context));
+	}
 
-    private void setUpdateAlarm(Context context) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC,
-                // set fire time according to frequency set by user. Default is 15000 millis.
-                System.currentTimeMillis() + ClockWidgetSettings.getUpdateFrequency(),
-                createClockUpdateIntent(context));
-    }
+	private void setUpdateAlarm(Context context) {
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.set(AlarmManager.RTC,
+				// set fire time according to frequency set by user. Default is 15000 millis.
+				System.currentTimeMillis() + ClockWidgetSettings.getUpdateFrequency(),
+				createClockUpdateIntent(context));
+	}
 
-    private PendingIntent createClockUpdateIntent(Context context) {
-        return PendingIntent.getBroadcast(context, REQUEST_CODE, new Intent(ACTION_UPDATE_CLOCK),
-                PendingIntent.FLAG_UPDATE_CURRENT);
-    }
+	private PendingIntent createClockUpdateIntent(Context context) {
+		return PendingIntent.getBroadcast(context, REQUEST_CODE,
+				new Intent(context, ClockWidgetProvider.class)
+						.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+						.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[1]),
+				PendingIntent.FLAG_UPDATE_CURRENT);
+	}
 }

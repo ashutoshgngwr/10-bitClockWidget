@@ -16,19 +16,19 @@
   -->
 
 <resources>
-    <string name="app_name">10-bit Clock Widget</string>
-    <string name="clock_update_frequency">Clock update frequency</string>
-    <string name="misc_options">Misc options</string>
-    <string name="appearance">Appearance</string>
-    <string name="extras">Extras</string>
-    <string name="help">Help</string>
-    <string name="about">About</string>
-    <string name="dot_size">Dot size</string>
-    <string name="display_separator">Display separator</string>
-    <string name="summary_display_separator">Display a line separating hours and minutes.</string>
-    <string name="am_time_color">A.M. time color</string>
-    <string name="summary_am_time_color">Clock\'s color before midday</string>
-    <string name="pm_time_color">P.M. time color</string>
-    <string name="summary_pm_time_color">Clock\'s color after midday</string>
-    <string name="clock_background_color">Clock\'s background color</string>
+	<string name="app_name">10-bit Clock Widget</string>
+	<string name="clock_update_frequency">Clock update frequency</string>
+	<string name="misc_options">Misc options</string>
+	<string name="appearance">Appearance</string>
+	<string name="extras">Extras</string>
+	<string name="help">Help</string>
+	<string name="about">About</string>
+	<string name="dot_size">Dot size</string>
+	<string name="display_separator">Display separator</string>
+	<string name="summary_display_separator">Display a line separating hours and minutes.</string>
+	<string name="am_time_color">A.M. time color</string>
+	<string name="summary_am_time_color">Clock\'s color before midday</string>
+	<string name="pm_time_color">P.M. time color</string>
+	<string name="summary_pm_time_color">Clock\'s color after midday</string>
+	<string name="clock_background_color">Clock\'s background color</string>
 </resources>

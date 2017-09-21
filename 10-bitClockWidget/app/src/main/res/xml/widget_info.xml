@@ -16,14 +16,15 @@
   ~
   -->
 
-<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+<appwidget-provider
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:configure="com.github.ashutoshgngwr.tenbitclockwidget.ClockWidgetPreferenceActivity"
     android:initialLayout="@layout/clock_widget_layout"
     android:minHeight="@dimen/widget_height"
-    android:minWidth="@dimen/widget_width"
     android:minResizeHeight="@dimen/widget_height"
     android:minResizeWidth="@dimen/widget_width"
-    android:updatePeriodMillis="0"
+    android:minWidth="@dimen/widget_width"
+    android:previewImage="@drawable/preview"
     android:resizeMode="horizontal|vertical"
-    android:configure="com.github.ashutoshgngwr.tenbitclockwidget.ClockWidgetPreferenceActivity"
-    android:previewImage="@drawable/preview">
+    android:updatePeriodMillis="0">
 </appwidget-provider>
