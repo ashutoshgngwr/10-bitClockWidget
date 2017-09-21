@@ -16,9 +16,9 @@
   -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <style type="text/css">
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <style type="text/css">
 			body{
 				margin:0px;
 				padding:10px;
@@ -47,31 +47,37 @@
 			    padding:20px;
 			    overflow-x:scroll;
 			}
-		</style>
-        <script>
+
+
+    </style>
+    <script>
             function update_app_info(versionName, versionCode) {
                 var e = document.getElementById("app_info");
                 var html = e.innerHTML.replace(/\b(__v__)\b/g, versionName + ' - ' + versionCode);
                 e.innerHTML = html;
             }
-        </script>
-        <title>About</title>
-    </head>
-    <body>
-        <h2>10-bit Clock Widget</h2>
-        <h4 id="app_info" class="subtitle">Version __v__<br />
-            &copy; 2017 Ashutosh Gangwar<br />
-            <a href="https://github.com/ashutoshgngwr/10-bitClockWidget">
-                https://github.com/ashutoshgngwr/10-bitClockWidget</a></h4>
-        <br />
-        <p>
-            10-bit Clock is a home screen widget that presents current time in 10 binary dots.
-            It is open-source and its source code is available
-            on <a href="https://github.com/ashutoshgngwr/10-bitClockWidget">GitHub</a>!
-        </p>
-        <br />
-        <h3>License</h3>
-        <pre>
+
+
+    </script>
+    <title>About</title>
+</head>
+<body>
+<h2>10-bit Clock Widget</h2>
+<h4 id="app_info" class="subtitle">Version __v__<br/>
+    &copy; 2017 Ashutosh Gangwar<br/>
+    <a href="https://github.com/ashutoshgngwr/10-bitClockWidget">
+        https://github.com/ashutoshgngwr/10-bitClockWidget</a></h4>
+<br/>
+<p>
+    10-bit Clock is a home screen widget that presents current time in 10 binary dots.
+    It is open-source and its source code is available
+    on <a href="https://github.com/ashutoshgngwr/10-bitClockWidget">GitHub</a>!
+</p>
+<br/>
+<h3>License</h3>
+<pre>
+Copyright 2017 Ashutosh Gangwar
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -84,12 +90,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
         </pre>
-        <br />
-        <h3>Dependencies</h3>
-        <ul>
-            <li>
-                <h4 class="subtitle">android-ColorPickerPreference</h4>
-                <pre>
+<br/>
+<h3>Dependencies</h3>
+<ul>
+    <li>
+        <h4 class="subtitle">android-ColorPickerPreference</h4>
+        <pre>
 Copyright (C) 2011 Sergey Margaritov & Daniel Nilsson
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -104,7 +110,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
                 </pre>
-            </li>
-        </ul>
-    </body>
+    </li>
+</ul>
+</body>
 </html>
