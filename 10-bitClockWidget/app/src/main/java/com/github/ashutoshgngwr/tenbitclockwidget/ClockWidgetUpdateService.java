@@ -18,12 +18,15 @@
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.app.IntentService;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.provider.AlarmClock;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
 
@@ -39,6 +42,7 @@ public class ClockWidgetUpdateService extends IntentService {
 	private static final int BIT_ALPHA_ACTIVE = 0xFF;
 	private static final int BIT_ALPHA_INACTIVE = 0x80;
 	private static final int SEPARATOR_LINE_ALPHA = 0x70;
+	private static final int REQUEST_CODE_CLOCK = 0x12;
 
 	private static Bitmap clockBitmap;
 	private static int lastUpdateHour, lastUpdateMinute;
@@ -54,6 +58,7 @@ public class ClockWidgetUpdateService extends IntentService {
 
 		RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.clock_widget_layout);
 		remoteViews.setImageViewBitmap(R.id.iv_clock, clockBitmap);
+		remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent());
 
 		widgetManager.updateAppWidget(intent.getIntArrayExtra("ids"), remoteViews);
 	}
@@ -142,5 +147,14 @@ public class ClockWidgetUpdateService extends IntentService {
 	private int px(int dp) {
 		return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
 				getResources().getDisplayMetrics()) * BITMAP_SCALE);
+	}
+
+	// Creates PendingIntent for default activity from default clock application
+	private PendingIntent createOnClickPendingIntent() {
+		Intent openClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
+		ActivityInfo clockInfo = getPackageManager().resolveActivity(openClockIntent, 0).activityInfo;
+		return PendingIntent.getActivity(this, REQUEST_CODE_CLOCK,
+				getPackageManager().getLaunchIntentForPackage(clockInfo.packageName),
+				PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 }
