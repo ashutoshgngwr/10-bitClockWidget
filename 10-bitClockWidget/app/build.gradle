@@ -24,8 +24,8 @@ android {
         applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 12
-        versionName "1.2"
+        versionCode 13
+        versionName "1.3"
         setProperty("archivesBaseName", "10-bitClockWidget")
     }
     buildTypes {
@@ -46,7 +46,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'net.margaritov.preference.colorpicker.ColorPickerPreference:ColorPickerPreference:1.0.0'
 }
