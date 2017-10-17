@@ -42,7 +42,7 @@ public class ClockWidgetUpdateService extends IntentService {
 	private static final int BIT_ALPHA_ACTIVE = 0xFF;
 	private static final int BIT_ALPHA_INACTIVE = 0x80;
 	private static final int SEPARATOR_LINE_ALPHA = 0x70;
-	private static final int REQUEST_CODE_CLOCK = 0x12;
+	private static final int RC_OPEN_CLOCK = 0x12;
 
 	private static Bitmap clockBitmap;
 	private static int lastUpdateHour, lastUpdateMinute;
@@ -59,8 +59,8 @@ public class ClockWidgetUpdateService extends IntentService {
 		RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.clock_widget_layout);
 		remoteViews.setImageViewBitmap(R.id.iv_clock, clockBitmap);
 		remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent());
-
-		widgetManager.updateAppWidget(intent.getIntArrayExtra("ids"), remoteViews);
+		widgetManager.updateAppWidget(intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS),
+				remoteViews);
 	}
 
 	private void createClockBitmap(boolean forceUpdate) {
@@ -153,7 +153,7 @@ public class ClockWidgetUpdateService extends IntentService {
 	private PendingIntent createOnClickPendingIntent() {
 		Intent openClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
 		ActivityInfo clockInfo = getPackageManager().resolveActivity(openClockIntent, 0).activityInfo;
-		return PendingIntent.getActivity(this, REQUEST_CODE_CLOCK,
+		return PendingIntent.getActivity(this, RC_OPEN_CLOCK,
 				getPackageManager().getLaunchIntentForPackage(clockInfo.packageName),
 				PendingIntent.FLAG_CANCEL_CURRENT);
 	}

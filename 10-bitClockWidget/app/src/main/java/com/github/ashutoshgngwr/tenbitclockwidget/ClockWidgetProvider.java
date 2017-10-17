@@ -27,10 +27,13 @@ import android.content.Intent;
 
 public class ClockWidgetProvider extends AppWidgetProvider {
 
-	private static final int REQUEST_CODE = 0x19d;
+	private static final int RC_UPDATE_CLOCK = 0x19d;
+
+	private boolean forceUpdate = false;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		forceUpdate = intent.getBooleanExtra(ClockWidgetUpdateService.EXTRA_FORCE_UPDATE, false);
 		if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()))
 			onUpdate(context, AppWidgetManager.getInstance(context), null);
 		else
@@ -48,7 +51,8 @@ public class ClockWidgetProvider extends AppWidgetProvider {
 
 		// start update service
 		Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
-		serviceIntent.putExtra("ids", ids);
+		serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+		serviceIntent.putExtra(ClockWidgetUpdateService.EXTRA_FORCE_UPDATE, forceUpdate);
 		context.startService(serviceIntent);
 
 		setUpdateAlarm(context);
@@ -75,7 +79,7 @@ public class ClockWidgetProvider extends AppWidgetProvider {
 	}
 
 	private PendingIntent createClockUpdateIntent(Context context) {
-		return PendingIntent.getBroadcast(context, REQUEST_CODE,
+		return PendingIntent.getBroadcast(context, RC_UPDATE_CLOCK,
 				new Intent(context, ClockWidgetProvider.class)
 						.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
 						.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[1]),

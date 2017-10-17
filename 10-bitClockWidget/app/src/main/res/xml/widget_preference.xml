@@ -30,14 +30,12 @@
 			android:title="@string/dot_size"/>
 
 		<net.margaritov.preference.colorpicker.ColorPickerPreference
-			alphaSlider="true"
 			android:defaultValue="#FF0F0F0F"
 			android:key="am_color"
 			android:summary="@string/summary_am_time_color"
 			android:title="@string/am_time_color"/>
 
 		<net.margaritov.preference.colorpicker.ColorPickerPreference
-			alphaSlider="true"
 			android:defaultValue="#FFFCFCFC"
 			android:key="pm_color"
 			android:summary="@string/summary_pm_time_color"
