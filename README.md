@@ -9,7 +9,8 @@
 <img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/docs/assets/screenshot_1.png" title="Screenshot" alt="screenshot" width="200"/>  <img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/docs/assets/screenshot_2.png" title="Screenshot" alt="screenshot" width="250"/>
 
 ## Download
-You can download the latest release [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases/latest). All other versions including latest release, are available [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases).
+<a href="https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.tenbitclockwidget" target="_blank" title="Get it on Google Play"><img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/docs/assets/google_play_badge.png" alt="Get it on Google Play" width="200"/></a>  
+Alternatively, you can download the latest release [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases/latest) on Github. All other versions including latest release, are also available [on Github](https://github.com/ashutoshgngwr/10-bitClockWidget/releases).
 
 ## Dependencies
 - [android-ColorPickerPreference](https://github.com/attenzione/android-ColorPickerPreference)
