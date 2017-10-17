@@ -31,6 +31,8 @@ import java.util.Calendar;
 
 public class ClockWidgetUpdateService extends IntentService {
 
+	public static final String EXTRA_FORCE_UPDATE = "force_update";
+
 	// Bitmap scaling factor to compensate for larger widget size
 	private static final float BITMAP_SCALE = 1.25F;
 
@@ -48,7 +50,7 @@ public class ClockWidgetUpdateService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
-		createClockBitmap();
+		createClockBitmap(intent.getBooleanExtra(EXTRA_FORCE_UPDATE, false));
 
 		RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.clock_widget_layout);
 		remoteViews.setImageViewBitmap(R.id.iv_clock, clockBitmap);
@@ -56,14 +58,14 @@ public class ClockWidgetUpdateService extends IntentService {
 		widgetManager.updateAppWidget(intent.getIntArrayExtra("ids"), remoteViews);
 	}
 
-	private void createClockBitmap() {
+	private void createClockBitmap(boolean forceUpdate) {
 		// get current time in 12-hour format
 		Calendar c = Calendar.getInstance();
 		c.setTimeInMillis(System.currentTimeMillis()); // set current time
 		int hour = c.get(Calendar.HOUR), minute = c.get(Calendar.MINUTE),
 				am_pm = c.get(Calendar.AM_PM);
 
-		if (clockBitmap != null && lastUpdateHour == hour && lastUpdateMinute == minute)
+		if (clockBitmap != null && lastUpdateHour == hour && lastUpdateMinute == minute && !forceUpdate)
 			return; // No need to update clock Bitmap.
 
 		lastUpdateHour = hour;

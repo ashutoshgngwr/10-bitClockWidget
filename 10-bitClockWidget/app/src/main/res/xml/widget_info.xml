@@ -19,12 +19,12 @@
 <appwidget-provider
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:configure="com.github.ashutoshgngwr.tenbitclockwidget.ClockWidgetPreferenceActivity"
-    android:initialLayout="@layout/clock_widget_layout"
-    android:minHeight="@dimen/widget_height"
-    android:minResizeHeight="@dimen/widget_height"
-    android:minResizeWidth="@dimen/widget_width"
-    android:minWidth="@dimen/widget_width"
-    android:previewImage="@drawable/preview"
-    android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="0">
+	android:initialLayout="@layout/clock_widget_layout"
+	android:minHeight="@dimen/widget_height"
+	android:minResizeHeight="@dimen/widget_height"
+	android:minResizeWidth="@dimen/widget_width"
+	android:minWidth="@dimen/widget_width"
+	android:previewImage="@drawable/preview"
+	android:resizeMode="horizontal|vertical"
+	android:updatePeriodMillis="0">
 </appwidget-provider>

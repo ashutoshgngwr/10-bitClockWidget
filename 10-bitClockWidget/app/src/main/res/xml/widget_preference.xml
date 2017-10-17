@@ -80,10 +80,6 @@
 			android:key="about"
 			android:title="@string/about"/>
 
-		<Preference
-			android:key="check_updates"
-			android:title="@string/check_updates"/>
-
 	</PreferenceCategory>
 
 </PreferenceScreen>
