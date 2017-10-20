@@ -17,15 +17,19 @@
 
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Build;
 import android.provider.AlarmClock;
 import android.util.TypedValue;
 import android.widget.RemoteViews;
@@ -40,7 +44,9 @@ public class ClockWidgetUpdateService extends IntentService {
 	private static final int BIT_ALPHA_ACTIVE = 0xFF;
 	private static final int BIT_ALPHA_INACTIVE = 0x80;
 	private static final int SEPARATOR_LINE_ALPHA = 0x70;
+
 	private static final int RC_OPEN_CLOCK = 0x12;
+	private static final int RC_UPDATE_CLOCK = 0x19;
 
 	public ClockWidgetUpdateService() {
 		super("ClockWidgetUpdateService");
@@ -53,8 +59,10 @@ public class ClockWidgetUpdateService extends IntentService {
 		RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.clock_widget_layout);
 		remoteViews.setImageViewBitmap(R.id.iv_clock, createClockBitmap());
 		remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent());
-		widgetManager.updateAppWidget(intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS),
-				remoteViews);
+		widgetManager.updateAppWidget(widgetManager.getAppWidgetIds(new ComponentName(getPackageName(),
+						ClockWidgetProvider.class.getName())), remoteViews);
+
+		setUpdateAlarm();
 	}
 
 	private Bitmap createClockBitmap() {
@@ -138,12 +146,29 @@ public class ClockWidgetUpdateService extends IntentService {
 				getResources().getDisplayMetrics()) * BITMAP_SCALE);
 	}
 
-	// Creates PendingIntent for default activity from default clock application
+	private void setUpdateAlarm() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.SECOND, 0);
+		calendar.add(Calendar.MINUTE, 1);
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+		if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2)
+			alarmManager.setExact(AlarmManager.RTC, calendar.getTimeInMillis(), createClockUpdateIntent(this));
+		else
+			alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), createClockUpdateIntent(this));
+	}
+
+	// Creates PendingIntent for default activity of default clock application
 	private PendingIntent createOnClickPendingIntent() {
 		Intent openClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
 		ActivityInfo clockInfo = getPackageManager().resolveActivity(openClockIntent, 0).activityInfo;
 		return PendingIntent.getActivity(this, RC_OPEN_CLOCK,
 				getPackageManager().getLaunchIntentForPackage(clockInfo.packageName),
 				PendingIntent.FLAG_CANCEL_CURRENT);
+	}
+
+	protected static PendingIntent createClockUpdateIntent(Context context) {
+		return PendingIntent.getService(context, RC_UPDATE_CLOCK,
+				new Intent(context, ClockWidgetUpdateService.class), PendingIntent.FLAG_CANCEL_CURRENT);
 	}
 }
