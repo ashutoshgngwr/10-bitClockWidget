@@ -25,15 +25,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
+import java.util.Calendar;
+
 public class ClockWidgetProvider extends AppWidgetProvider {
 
 	private static final int RC_UPDATE_CLOCK = 0x19d;
 
-	private boolean forceUpdate = false;
-
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		forceUpdate = intent.getBooleanExtra(ClockWidgetUpdateService.EXTRA_FORCE_UPDATE, false);
 		if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()))
 			onUpdate(context, AppWidgetManager.getInstance(context), null);
 		else
@@ -52,7 +51,6 @@ public class ClockWidgetProvider extends AppWidgetProvider {
 		// start update service
 		Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
 		serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-		serviceIntent.putExtra(ClockWidgetUpdateService.EXTRA_FORCE_UPDATE, forceUpdate);
 		context.startService(serviceIntent);
 
 		setUpdateAlarm(context);
@@ -71,11 +69,11 @@ public class ClockWidgetProvider extends AppWidgetProvider {
 	}
 
 	private void setUpdateAlarm(Context context) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.SECOND, 0);
+		calendar.add(Calendar.MINUTE, 1);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		alarmManager.set(AlarmManager.RTC,
-				// set fire time according to frequency set by user. Default is 15000 millis.
-				System.currentTimeMillis() + ClockWidgetSettings.getUpdateFrequency(),
-				createClockUpdateIntent(context));
+		alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), createClockUpdateIntent(context));
 	}
 
 	private PendingIntent createClockUpdateIntent(Context context) {

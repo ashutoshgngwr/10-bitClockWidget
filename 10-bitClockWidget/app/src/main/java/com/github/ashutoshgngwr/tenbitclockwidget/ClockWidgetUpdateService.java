@@ -34,8 +34,6 @@ import java.util.Calendar;
 
 public class ClockWidgetUpdateService extends IntentService {
 
-	public static final String EXTRA_FORCE_UPDATE = "force_update";
-
 	// Bitmap scaling factor to compensate for larger widget size
 	private static final float BITMAP_SCALE = 1.25F;
 
@@ -44,9 +42,6 @@ public class ClockWidgetUpdateService extends IntentService {
 	private static final int SEPARATOR_LINE_ALPHA = 0x70;
 	private static final int RC_OPEN_CLOCK = 0x12;
 
-	private static Bitmap clockBitmap;
-	private static int lastUpdateHour, lastUpdateMinute;
-
 	public ClockWidgetUpdateService() {
 		super("ClockWidgetUpdateService");
 	}
@@ -54,27 +49,19 @@ public class ClockWidgetUpdateService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
-		createClockBitmap(intent.getBooleanExtra(EXTRA_FORCE_UPDATE, false));
 
 		RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.clock_widget_layout);
-		remoteViews.setImageViewBitmap(R.id.iv_clock, clockBitmap);
+		remoteViews.setImageViewBitmap(R.id.iv_clock, createClockBitmap());
 		remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent());
 		widgetManager.updateAppWidget(intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS),
 				remoteViews);
 	}
 
-	private void createClockBitmap(boolean forceUpdate) {
+	private Bitmap createClockBitmap() {
 		// get current time in 12-hour format
 		Calendar c = Calendar.getInstance();
-		c.setTimeInMillis(System.currentTimeMillis()); // set current time
 		int hour = c.get(Calendar.HOUR), minute = c.get(Calendar.MINUTE),
 				am_pm = c.get(Calendar.AM_PM);
-
-		if (clockBitmap != null && lastUpdateHour == hour && lastUpdateMinute == minute && !forceUpdate)
-			return; // No need to update clock Bitmap.
-
-		lastUpdateHour = hour;
-		lastUpdateMinute = minute;
 
 		// scale width & height here and all other DIP values will be scaled in px() function
 		int width = Math.round(getResources().getDimension(R.dimen.widget_width) * BITMAP_SCALE),
@@ -86,7 +73,7 @@ public class ClockWidgetUpdateService extends IntentService {
 				dotSpacingY = (height - dot_size * 2) / 3; // same as X
 
 		// create a bitmap of widget's size
-		clockBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Bitmap clockBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
 		Canvas canvas = new Canvas(clockBitmap);
 
@@ -142,6 +129,8 @@ public class ClockWidgetUpdateService extends IntentService {
 			canvas.drawLine(x1, dotSpacingY + dot_radius, x1,
 					dotSpacingY + dot_radius + dotSpacingY + dot_size, p);
 		}
+
+		return clockBitmap;
 	}
 
 	private int px(int dp) {

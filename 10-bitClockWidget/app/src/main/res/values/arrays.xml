@@ -27,14 +27,4 @@
 		<item>10</item>
 		<item>12</item>
 	</string-array>
-	<string-array name="pref_update_frequency">
-		<item>Every 15 seconds</item>
-		<item>Every 30 seconds</item>
-		<item>Every minute</item>
-	</string-array>
-	<string-array name="pref_update_frequency_values">
-		<item>15000</item>
-		<item>30000</item>
-		<item>60000</item>
-	</string-array>
 </resources>

@@ -56,9 +56,6 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragment
 		ListPreference dotSize = (ListPreference) findPreference("dot_size");
 		dotSize.setSummary(dotSize.getEntry());
 
-		ListPreference updateFrequency = (ListPreference) findPreference("update_frequency");
-		updateFrequency.setSummary(updateFrequency.getEntry());
-
 		Preference about = findPreference("about");
 		about.setOnPreferenceClickListener(extrasPreferenceClickListener);
 

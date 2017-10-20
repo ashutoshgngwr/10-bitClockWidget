@@ -17,11 +17,8 @@
 
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class ClockWidgetSettings {
 
@@ -40,10 +37,6 @@ public class ClockWidgetSettings {
 		return sharedPreferencesInstance;
 	}
 
-	protected static int getUpdateFrequency() {
-		return Integer.parseInt(getPreferences().getString("update_frequency", "0"));
-	}
-
 	protected static boolean shouldDisplaySeparator() {
 		return getPreferences().getBoolean("display_separator", false);
 	}
@@ -58,14 +51,5 @@ public class ClockWidgetSettings {
 
 	protected static int getClockBackgroundColor() {
 		return getPreferences().getInt("background_color", 0);
-	}
-
-	public static Integer getAppVersionCode(Context context) {
-		try {
-			return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
-		} catch (PackageManager.NameNotFoundException e) {
-			Log.w(ClockWidgetSettings.class.getSimpleName(), e);
-			return 0;
-		}
 	}
 }

@@ -44,7 +44,6 @@ public class ClockWidgetPreferenceActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, ClockWidgetProvider.class);
 		intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[1]);
-		intent.putExtra(ClockWidgetUpdateService.EXTRA_FORCE_UPDATE, true);
 		sendBroadcast(intent);
 	}
 }
