@@ -31,4 +31,5 @@
 	<string name="pm_time_color">P.M. time color</string>
 	<string name="summary_pm_time_color">Clock\'s color after midday</string>
 	<string name="clock_background_color">Clock\'s background color</string>
+	<string name="select">Select</string>
 </resources>

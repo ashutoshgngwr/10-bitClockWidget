@@ -21,11 +21,15 @@ package com.github.ashutoshgngwr.tenbitclockwidget;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class ClockWidgetPreferenceFragment extends PreferenceFragment
+import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompatDividers;
+
+public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompatDividers
 		implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private Preference.OnPreferenceClickListener extrasPreferenceClickListener
@@ -49,9 +53,18 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragment
 	};
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.widget_preference);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		try {
+			return super.onCreateView(inflater, container, savedInstanceState);
+		} finally {
+			setDividerPreferences(DIVIDER_PADDING_CHILD | DIVIDER_CATEGORY_AFTER_LAST
+					| DIVIDER_CATEGORY_BETWEEN);
+		}
+	}
+
+	@Override
+	public void onCreatePreferencesFix(Bundle savedInstanceState, String rootKey) {
+		setPreferencesFromResource(R.xml.widget_preference, rootKey);
 
 		ListPreference dotSize = (ListPreference) findPreference("dot_size");
 		dotSize.setSummary(dotSize.getEntry());

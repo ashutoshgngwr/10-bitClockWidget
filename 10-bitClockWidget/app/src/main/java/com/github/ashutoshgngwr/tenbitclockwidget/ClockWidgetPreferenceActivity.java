@@ -28,7 +28,7 @@ public class ClockWidgetPreferenceActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getFragmentManager().beginTransaction()
+		getSupportFragmentManager().beginTransaction()
 				.replace(android.R.id.content, new ClockWidgetPreferenceFragment())
 				.commit();
 
