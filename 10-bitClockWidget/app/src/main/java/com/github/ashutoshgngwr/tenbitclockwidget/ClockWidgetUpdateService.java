@@ -60,7 +60,7 @@ public class ClockWidgetUpdateService extends IntentService {
 		remoteViews.setImageViewBitmap(R.id.iv_clock, createClockBitmap());
 		remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent());
 		widgetManager.updateAppWidget(widgetManager.getAppWidgetIds(new ComponentName(getPackageName(),
-						ClockWidgetProvider.class.getName())), remoteViews);
+				ClockWidgetProvider.class.getName())), remoteViews);
 
 		setUpdateAlarm();
 	}
@@ -151,8 +151,9 @@ public class ClockWidgetUpdateService extends IntentService {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.add(Calendar.MINUTE, 1);
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-		if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2)
+		if (alarmManager == null)
+			return;
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2)
 			alarmManager.setExact(AlarmManager.RTC, calendar.getTimeInMillis(), createClockUpdateIntent(this));
 		else
 			alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), createClockUpdateIntent(this));
