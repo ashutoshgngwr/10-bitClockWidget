@@ -23,13 +23,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
-import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompatDividers;
-
-public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompatDividers
+public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
 		implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private Preference.OnPreferenceClickListener extrasPreferenceClickListener
@@ -53,17 +49,7 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompatDivid
 	};
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		try {
-			return super.onCreateView(inflater, container, savedInstanceState);
-		} finally {
-			setDividerPreferences(DIVIDER_PADDING_CHILD | DIVIDER_CATEGORY_AFTER_LAST
-					| DIVIDER_CATEGORY_BETWEEN);
-		}
-	}
-
-	@Override
-	public void onCreatePreferencesFix(Bundle savedInstanceState, String rootKey) {
+	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		setPreferencesFromResource(R.xml.widget_preference, rootKey);
 
 		ListPreference dotSize = (ListPreference) findPreference("dot_size");
@@ -81,7 +67,6 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompatDivid
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		Preference preference = findPreference(key);
-
 		if (preference instanceof ListPreference)
 			preference.setSummary(((ListPreference) preference).getEntry());
 	}

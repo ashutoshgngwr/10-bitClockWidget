@@ -19,7 +19,7 @@ package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.preference.PreferenceManagerFix;
+import android.support.v7.preference.PreferenceManager;
 
 public class ClockWidgetApplication extends Application {
 
@@ -35,6 +35,6 @@ public class ClockWidgetApplication extends Application {
 		mInstance = this;
 
 		// Load default values from widget_preference.xml file to shared preferences.
-		PreferenceManagerFix.setDefaultValues(this, R.xml.widget_preference, false);
+		PreferenceManager.setDefaultValues(this, R.xml.widget_preference, false);
 	}
 }
