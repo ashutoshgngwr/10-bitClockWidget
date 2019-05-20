@@ -26,60 +26,60 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
-		implements SharedPreferences.OnSharedPreferenceChangeListener {
+    implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-	private Preference.OnPreferenceClickListener extrasPreferenceClickListener
-			= new Preference.OnPreferenceClickListener() {
-		@Override
-		public boolean onPreferenceClick(Preference preference) {
-			Intent activityIntent = new Intent(getActivity(), WebViewExtrasActivity.class);
+  private Preference.OnPreferenceClickListener extrasPreferenceClickListener
+      = new Preference.OnPreferenceClickListener() {
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+      Intent activityIntent = new Intent(getActivity(), WebViewExtrasActivity.class);
 
-			switch (preference.getKey()) {
-				case "about":
-					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "about.html");
-					break;
-				case "help":
-					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "help.html");
-					break;
-			}
+      switch (preference.getKey()) {
+        case "about":
+          activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "about.html");
+          break;
+        case "help":
+          activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "help.html");
+          break;
+      }
 
-			startActivity(activityIntent);
-			return true;
-		}
-	};
+      startActivity(activityIntent);
+      return true;
+    }
+  };
 
-	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-		setPreferencesFromResource(R.xml.widget_preference, rootKey);
+  @Override
+  public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    setPreferencesFromResource(R.xml.widget_preference, rootKey);
 
-		ListPreference dotSize = (ListPreference) findPreference("dot_size");
-		dotSize.setSummary(dotSize.getEntry());
+    ListPreference dotSize = (ListPreference) findPreference("dot_size");
+    dotSize.setSummary(dotSize.getEntry());
 
-		Preference about = findPreference("about");
-		about.setOnPreferenceClickListener(extrasPreferenceClickListener);
+    Preference about = findPreference("about");
+    about.setOnPreferenceClickListener(extrasPreferenceClickListener);
 
-		Preference help = findPreference("help");
-		help.setOnPreferenceClickListener(extrasPreferenceClickListener);
-	}
+    Preference help = findPreference("help");
+    help.setOnPreferenceClickListener(extrasPreferenceClickListener);
+  }
 
-	// Listening for changes in SharedPreferences to get updated values of ListPreference.
-	// Adding OnPreferenceChangeListener gives old value for ListPreference#getEntry()
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		Preference preference = findPreference(key);
-		if (preference instanceof ListPreference)
-			preference.setSummary(((ListPreference) preference).getEntry());
-	}
+  // Listening for changes in SharedPreferences to get updated values of ListPreference.
+  // Adding OnPreferenceChangeListener gives old value for ListPreference#getEntry()
+  @Override
+  public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    Preference preference = findPreference(key);
+    if (preference instanceof ListPreference)
+      preference.setSummary(((ListPreference) preference).getEntry());
+  }
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-	}
+  @Override
+  public void onResume() {
+    super.onResume();
+    getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+  }
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-	}
+  @Override
+  public void onPause() {
+    super.onPause();
+    getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+  }
 }

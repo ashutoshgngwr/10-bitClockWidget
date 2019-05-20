@@ -18,35 +18,35 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
-    defaultConfig {
-        applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
-        minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 15
-        versionName "1.5"
-        setProperty("archivesBaseName", "10-bitClockWidget")
+  compileSdkVersion 28
+  buildToolsVersion "28.0.3"
+  defaultConfig {
+    applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
+    minSdkVersion 14
+    targetSdkVersion 28
+    versionCode 15
+    versionName "1.5"
+    setProperty("archivesBaseName", "10-bitClockWidget")
+  }
+  buildTypes {
+    release {
+      debuggable false
+      minifyEnabled true
+      shrinkResources true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
-    buildTypes {
-        release {
-            debuggable false
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
 
-        debug {
-            debuggable true
-            minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+    debug {
+      debuggable true
+      minifyEnabled false
+      shrinkResources false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:preference-v14:28.0.0'
-    implementation 'com.github.GrenderG:Color-O-Matic:1.1.5'
+  implementation 'com.android.support:appcompat-v7:28.0.0'
+  implementation 'com.android.support:preference-v14:28.0.0'
+  implementation 'com.github.GrenderG:Color-O-Matic:1.1.5'
 }

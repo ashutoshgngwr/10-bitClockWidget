@@ -15,48 +15,53 @@
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.github.ashutoshgngwr.tenbitclockwidget">
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.github.ashutoshgngwr.tenbitclockwidget">
 
-	<!-- To publish apk on Samsung Apps. -->
-	<uses-permission
-		android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+  <!-- To publish apk on Samsung Apps. -->
+  <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
-	<application
-		android:name=".ClockWidgetApplication"
-		android:allowBackup="true"
-		android:icon="@mipmap/ic_launcher"
-		android:label="@string/app_name"
-		android:roundIcon="@mipmap/ic_launcher_round">
-		<receiver
-			android:name=".ClockWidgetProvider"
-			android:icon="@mipmap/ic_launcher"
-			android:label="@string/app_name">
-			<intent-filter>
-				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-				<action android:name="android.appwidget.action.APPWIDGET_ENABLED"/>
-				<action android:name="android.appwidget.action.APPWIDGET_DISABLED"/>
-				<action android:name="android.intent.action.TIME_SET"/>
-			</intent-filter>
+  <application
+    android:name=".ClockWidgetApplication"
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-			<meta-data
-				android:name="android.appwidget.provider"
-				android:resource="@xml/widget_info"/>
-		</receiver>
+    <receiver
+      android:name=".ClockWidgetProvider"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name">
 
-		<service android:name=".ClockWidgetUpdateService"/>
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+        <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
+        <action android:name="android.intent.action.TIME_SET" />
+      </intent-filter>
 
-		<activity
-			android:name=".ClockWidgetPreferenceActivity"
-			android:theme="@style/PreferenceTheme">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"/>
-				<category android:name="android.intent.category.LAUNCHER"/>
-				<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
-			</intent-filter>
-		</activity>
-		<activity
-			android:name=".WebViewExtrasActivity"
-			android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
-	</application>
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/widget_info" />
+    </receiver>
+
+    <service android:name=".ClockWidgetUpdateService" />
+
+    <activity
+      android:name=".ClockWidgetPreferenceActivity"
+      android:theme="@style/PreferenceTheme">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+        <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+      </intent-filter>
+    </activity>
+
+    <activity
+      android:name=".WebViewExtrasActivity"
+      android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+
+  </application>
 
 </manifest>

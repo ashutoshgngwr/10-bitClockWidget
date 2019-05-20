@@ -26,37 +26,37 @@ import android.content.Intent;
 
 public class ClockWidgetProvider extends AppWidgetProvider {
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()))
-			onUpdate(context, AppWidgetManager.getInstance(context), null);
-		else
-			super.onReceive(context, intent);
-	}
+  @Override
+  public void onReceive(Context context, Intent intent) {
+    if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()))
+      onUpdate(context, AppWidgetManager.getInstance(context), null);
+    else
+      super.onReceive(context, intent);
+  }
 
-	@Override
-	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int appWidgetIds[]) {
-		// get widget ids for all available instances
-		int ids[] = appWidgetManager.getAppWidgetIds(
-				new ComponentName(context.getPackageName(), getClass().getName()));
+  @Override
+  public void onUpdate(Context context, AppWidgetManager appWidgetManager, int appWidgetIds[]) {
+    // get widget ids for all available instances
+    int ids[] = appWidgetManager.getAppWidgetIds(
+        new ComponentName(context.getPackageName(), getClass().getName()));
 
-		if (ids.length == 0)
-			return; // No widget is added to home screen. Bailing out!
+    if (ids.length == 0)
+      return; // No widget is added to home screen. Bailing out!
 
-		// start update service
-		Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
-		context.startService(serviceIntent);
-	}
+    // start update service
+    Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
+    context.startService(serviceIntent);
+  }
 
-	@Override
-	public void onEnabled(Context context) {
-		onUpdate(context, AppWidgetManager.getInstance(context), null);
-	}
+  @Override
+  public void onEnabled(Context context) {
+    onUpdate(context, AppWidgetManager.getInstance(context), null);
+  }
 
-	@Override
-	public void onDisabled(Context context) {
-		// Cancel all existing alarms for clock update service.
-		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		alarmManager.cancel(ClockWidgetUpdateService.createClockUpdateIntent(context));
-	}
+  @Override
+  public void onDisabled(Context context) {
+    // Cancel all existing alarms for clock update service.
+    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    alarmManager.cancel(ClockWidgetUpdateService.createClockUpdateIntent(context));
+  }
 }

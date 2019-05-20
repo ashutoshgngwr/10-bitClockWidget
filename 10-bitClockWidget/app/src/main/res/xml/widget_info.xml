@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~     Copyright (C) 2017  Ashutosh Gangwar
   ~
   ~     This program is free software: you can redistribute it and/or modify
@@ -16,15 +15,13 @@
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<appwidget-provider
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:configure="com.github.ashutoshgngwr.tenbitclockwidget.ClockWidgetPreferenceActivity"
-	android:initialLayout="@layout/clock_widget_layout"
-	android:minHeight="@dimen/widget_height"
-	android:minResizeHeight="@dimen/widget_height"
-	android:minResizeWidth="@dimen/widget_width"
-	android:minWidth="@dimen/widget_width"
-	android:previewImage="@drawable/preview"
-	android:resizeMode="horizontal|vertical"
-	android:updatePeriodMillis="0">
-</appwidget-provider>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+  android:configure="com.github.ashutoshgngwr.tenbitclockwidget.ClockWidgetPreferenceActivity"
+  android:initialLayout="@layout/clock_widget_layout"
+  android:minHeight="@dimen/widget_height"
+  android:minResizeHeight="@dimen/widget_height"
+  android:minResizeWidth="@dimen/widget_width"
+  android:minWidth="@dimen/widget_width"
+  android:previewImage="@drawable/preview"
+  android:resizeMode="horizontal|vertical"
+  android:updatePeriodMillis="0"></appwidget-provider>
