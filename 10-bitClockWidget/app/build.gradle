@@ -24,8 +24,8 @@ android {
     applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
     minSdkVersion 14
     targetSdkVersion 28
-    versionCode 15
-    versionName "1.5"
+    versionCode 16
+    versionName "1.6"
     setProperty("archivesBaseName", "10-bitClockWidget")
   }
   buildTypes {
