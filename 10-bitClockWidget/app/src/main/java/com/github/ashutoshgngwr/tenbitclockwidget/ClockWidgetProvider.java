@@ -17,46 +17,81 @@
 
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
-import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Build;
+import android.provider.AlarmClock;
+import android.util.Log;
+import android.widget.RemoteViews;
 
 public class ClockWidgetProvider extends AppWidgetProvider {
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()))
-			onUpdate(context, AppWidgetManager.getInstance(context), null);
-		else
-			super.onReceive(context, intent);
-	}
+  private static final String TAG = ClockWidgetProvider.class.getSimpleName();
 
-	@Override
-	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int appWidgetIds[]) {
-		// get widget ids for all available instances
-		int ids[] = appWidgetManager.getAppWidgetIds(
-				new ComponentName(context.getPackageName(), getClass().getName()));
+  private static final int RC_OPEN_CLOCK = 0x12;
 
-		if (ids.length == 0)
-			return; // No widget is added to home screen. Bailing out!
+  protected static final String ACTION_UPDATE_CLOCK = "action_update_clock";
 
-		// start update service
-		Intent serviceIntent = new Intent(context, ClockWidgetUpdateService.class);
-		context.startService(serviceIntent);
-	}
+  @Override
+  public void onReceive(Context context, Intent intent) {
+    if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()) || ACTION_UPDATE_CLOCK.equals(intent.getAction()))
+      onUpdate(context, AppWidgetManager.getInstance(context), null);
+    else
+      super.onReceive(context, intent);
+  }
 
-	@Override
-	public void onEnabled(Context context) {
-		onUpdate(context, AppWidgetManager.getInstance(context), null);
-	}
+  @Override
+  public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    // get widget ids for all available instances
+    int[] ids = appWidgetManager.getAppWidgetIds(
+        new ComponentName(context.getPackageName(), getClass().getName()));
 
-	@Override
-	public void onDisabled(Context context) {
-		// Cancel all existing alarms for clock update service.
-		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		alarmManager.cancel(ClockWidgetUpdateService.createClockUpdateIntent(context));
-	}
+    if (ids.length == 0) {
+      Log.d(TAG, "Nothing to update... Bailing out!");
+      return; // No widget is added to home screen. Bailing out!
+    }
+
+    RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.clock_widget_layout);
+    remoteViews.setImageViewBitmap(R.id.iv_clock, ClockWidgetRenderer.renderBitmap());
+    remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent(context));
+    appWidgetManager.updateAppWidget(ids, remoteViews);
+    Log.d(TAG, "Finished updating widget!");
+
+    // start clock update service if it wasn't running already.
+    onEnabled(context);
+  }
+
+  @Override
+  public void onEnabled(Context context) {
+    if (ClockWidgetUpdateService.isRunning()) {
+      return;
+    }
+
+    Log.d(TAG, "Start widget update service...");
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      context.startForegroundService(new Intent(context, ClockWidgetUpdateService.class));
+    } else {
+      context.startService(new Intent(context, ClockWidgetUpdateService.class));
+    }
+  }
+
+  @Override
+  public void onDisabled(Context context) {
+    Log.d(TAG, "Stopping widget update service...");
+    context.stopService(new Intent(context, ClockWidgetUpdateService.class));
+  }
+
+  // Creates PendingIntent for default activity of default clock application
+  private PendingIntent createOnClickPendingIntent(Context context) {
+    Intent openClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
+    ActivityInfo clockInfo = context.getPackageManager().resolveActivity(openClockIntent, 0).activityInfo;
+    return PendingIntent.getActivity(context, RC_OPEN_CLOCK,
+        context.getPackageManager().getLaunchIntentForPackage(clockInfo.packageName),
+        PendingIntent.FLAG_CANCEL_CURRENT);
+  }
 }

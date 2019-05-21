@@ -18,38 +18,39 @@
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-public class ClockWidgetSettings {
+import androidx.preference.PreferenceManager;
 
-	private static SharedPreferences sharedPreferencesInstance;
+class ClockWidgetSettings {
 
-	protected static int getDotSize() {
-		return Integer.parseInt(getPreferences().getString("dot_size", "0"));
-	}
+  private static SharedPreferences sharedPreferencesInstance;
 
-	private static SharedPreferences getPreferences() {
-		if (sharedPreferencesInstance == null) {
-			sharedPreferencesInstance = PreferenceManager.getDefaultSharedPreferences(
-					ClockWidgetApplication.getContext());
-		}
+  static int getDotSize() {
+    return Integer.parseInt(getPreferences().getString("dot_size", "0"));
+  }
 
-		return sharedPreferencesInstance;
-	}
+  private static SharedPreferences getPreferences() {
+    if (sharedPreferencesInstance == null) {
+      sharedPreferencesInstance = PreferenceManager.getDefaultSharedPreferences(
+          ClockWidgetApplication.getContext());
+    }
 
-	protected static boolean shouldDisplaySeparator() {
-		return getPreferences().getBoolean("display_separator", false);
-	}
+    return sharedPreferencesInstance;
+  }
 
-	protected static int getClockAMColor() {
-		return getPreferences().getInt("am_color", 0);
-	}
+  static boolean shouldDisplaySeparator() {
+    return getPreferences().getBoolean("display_separator", false);
+  }
 
-	protected static int getClockPMColor() {
-		return getPreferences().getInt("pm_color", 0);
-	}
+  static int getClockAMColor() {
+    return getPreferences().getInt("am_color", 0);
+  }
 
-	protected static int getClockBackgroundColor() {
-		return getPreferences().getInt("background_color", 0);
-	}
+  static int getClockPMColor() {
+    return getPreferences().getInt("pm_color", 0);
+  }
+
+  static int getClockBackgroundColor() {
+    return getPreferences().getInt("background_color", 0);
+  }
 }

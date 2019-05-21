@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~     Copyright (C) 2017  Ashutosh Gangwar
   ~
   ~     This program is free software: you can redistribute it and/or modify
@@ -17,14 +16,14 @@
   -->
 
 <resources>
-	<string-array name="pref_dot_size">
-		<item>Small</item>
-		<item>Medium</item>
-		<item>Large</item>
-	</string-array>
-	<string-array name="pref_dot_size_values">
-		<item>8</item>
-		<item>10</item>
-		<item>12</item>
-	</string-array>
+  <string-array name="pref_dot_size">
+    <item>Small</item>
+    <item>Medium</item>
+    <item>Large</item>
+  </string-array>
+  <string-array name="pref_dot_size_values">
+    <item>8</item>
+    <item>10</item>
+    <item>12</item>
+  </string-array>
 </resources>
