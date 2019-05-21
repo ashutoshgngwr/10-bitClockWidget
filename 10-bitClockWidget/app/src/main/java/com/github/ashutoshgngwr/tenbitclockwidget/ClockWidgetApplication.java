@@ -19,7 +19,8 @@ package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 public class ClockWidgetApplication extends Application {
 

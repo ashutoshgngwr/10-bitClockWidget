@@ -14,11 +14,11 @@
   ~     You should have received a copy of the GNU General Public License
   ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <android.support.v7.preference.PreferenceCategory android:title="@string/appearance">
+  <androidx.preference.PreferenceCategory android:title="@string/appearance">
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:defaultValue="10"
       android:entries="@array/pref_dot_size"
       android:entryValues="@array/pref_dot_size_values"
@@ -43,24 +43,24 @@
       android:key="background_color"
       android:title="@string/clock_background_color" />
 
-    <android.support.v7.preference.CheckBoxPreference
+    <androidx.preference.CheckBoxPreference
       android:defaultValue="true"
       android:key="display_separator"
       android:summary="@string/summary_display_separator"
       android:title="@string/display_separator" />
 
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
-  <android.support.v7.preference.PreferenceCategory android:title="@string/extras">
+  <androidx.preference.PreferenceCategory android:title="@string/extras">
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="help"
       android:title="@string/help" />
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="about"
       android:title="@string/about" />
 
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

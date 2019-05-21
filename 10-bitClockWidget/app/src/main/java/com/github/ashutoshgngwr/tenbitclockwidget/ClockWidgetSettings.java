@@ -18,7 +18,8 @@
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 class ClockWidgetSettings {
 

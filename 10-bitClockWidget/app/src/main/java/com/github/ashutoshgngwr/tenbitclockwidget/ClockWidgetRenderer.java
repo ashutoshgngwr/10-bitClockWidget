@@ -5,11 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.DimenRes;
 import android.util.Log;
 import android.util.TypedValue;
 
 import java.util.Calendar;
+
+import androidx.annotation.DimenRes;
 
 class ClockWidgetRenderer {
 

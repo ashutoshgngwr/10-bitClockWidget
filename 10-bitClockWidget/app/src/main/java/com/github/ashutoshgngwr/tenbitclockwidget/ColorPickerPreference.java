@@ -22,14 +22,14 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
-import android.support.annotation.ColorInt;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import es.dmoral.coloromatic.IndicatorMode;
 import es.dmoral.coloromatic.colormode.ColorMode;
 import es.dmoral.coloromatic.view.ColorOMaticView;
@@ -82,7 +82,6 @@ public class ColorPickerPreference extends Preference implements ColorOMaticView
   public void onBindViewHolder(PreferenceViewHolder viewHolder) {
     super.onBindViewHolder(viewHolder);
     colorView = viewHolder.findViewById(R.id.color_preview);
-
     ((GradientDrawable)
         ((LayerDrawable) colorView.getBackground())
             .findDrawableByLayerId(R.id.color))
@@ -90,11 +89,13 @@ public class ColorPickerPreference extends Preference implements ColorOMaticView
   }
 
   @Override
-  protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-    if (restoreValue)
+  protected void onSetInitialValue(Object defaultValue) {
+    if (defaultValue == null) {
       color = getPersistedInt(0);
-    else
-      persistInt(color = (Integer) defaultValue);
+    } else {
+      color = (Integer) defaultValue;
+    }
+    persistInt(color);
   }
 
   @Override
