@@ -1,4 +1,6 @@
 # 10-bitClockWidget
+[![Build Status](https://travis-ci.org/ashutoshgngwr/10-bitClockWidget.svg?branch=master)](https://travis-ci.org/ashutoshgngwr/10-bitClockWidget)
+
 **Me:** 10-bit Clock Widget uses 10 binary dots and their color to represent current time in
 12-hour format.  
 **Inner me**: Shouldn't it be 11 bits?  
