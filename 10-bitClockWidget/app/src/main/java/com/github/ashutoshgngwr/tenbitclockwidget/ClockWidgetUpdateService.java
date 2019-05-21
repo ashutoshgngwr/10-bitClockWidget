@@ -43,6 +43,12 @@ public class ClockWidgetUpdateService extends Service implements Runnable {
   private Handler mHandler;
   private BroadcastReceiver mUpdateReceiver = new ClockWidgetProvider();
 
+  private static volatile boolean isRunning = false;
+
+  protected static boolean isRunning() {
+    return isRunning;
+  }
+
   @Nullable
   @Override
   public IBinder onBind(Intent intent) {
@@ -87,6 +93,7 @@ public class ClockWidgetUpdateService extends Service implements Runnable {
 
   @Override
   public void onCreate() {
+    isRunning = true;
     mHandler = new Handler();
     IntentFilter intentFilter = new IntentFilter();
     intentFilter.addAction(ClockWidgetProvider.ACTION_UPDATE_CLOCK);
@@ -95,7 +102,9 @@ public class ClockWidgetUpdateService extends Service implements Runnable {
 
   @Override
   public void onDestroy() {
+    mHandler.removeCallbacks(this);
     LocalBroadcastManager.getInstance(this).unregisterReceiver(mUpdateReceiver);
+    isRunning = false;
   }
 
   @Override

@@ -72,10 +72,17 @@ public class ClockWidgetProvider extends AppWidgetProvider {
     remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent(context));
     appWidgetManager.updateAppWidget(ids, remoteViews);
     Log.d(TAG, "Finished updating widget!");
+
+    // start clock update service if it wasn't running already.
+    onEnabled(context);
   }
 
   @Override
   public void onEnabled(Context context) {
+    if (ClockWidgetUpdateService.isRunning()) {
+      return;
+    }
+
     Log.d(TAG, "Start widget update service...");
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       context.startForegroundService(new Intent(context, ClockWidgetUpdateService.class));
