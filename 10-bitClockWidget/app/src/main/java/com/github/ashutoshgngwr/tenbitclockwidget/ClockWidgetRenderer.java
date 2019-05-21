@@ -11,7 +11,7 @@ import android.util.TypedValue;
 
 import java.util.Calendar;
 
-public class ClockWidgetRenderer {
+class ClockWidgetRenderer {
 
   private static final String TAG = ClockWidgetRenderer.class.getSimpleName();
 
@@ -26,7 +26,7 @@ public class ClockWidgetRenderer {
   private Paint mPaint;
   private Bitmap clockBitmap;
 
-  protected static Bitmap renderBitmap() {
+  static Bitmap renderBitmap() {
     if (mInstance == null) {
       Log.d(TAG, "Creating a new renderer instance...");
       mInstance = new ClockWidgetRenderer();

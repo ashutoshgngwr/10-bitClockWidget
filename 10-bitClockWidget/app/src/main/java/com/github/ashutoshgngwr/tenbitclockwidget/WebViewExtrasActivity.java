@@ -17,6 +17,7 @@
 
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -33,12 +34,13 @@ public class WebViewExtrasActivity extends AppCompatActivity {
 
   protected static final String EXTRA_ASSET_FILE = "asset_file";
 
+  @SuppressLint("SetJavaScriptEnabled")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_webview_extras);
 
-    final WebView webView = (WebView) findViewById(R.id.wv_main);
+    final WebView webView = findViewById(R.id.wv_main);
     webView.getSettings().setDisplayZoomControls(false);
     webView.getSettings().setSupportZoom(false);
     webView.getSettings().setBuiltInZoomControls(false);
@@ -80,10 +82,8 @@ public class WebViewExtrasActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        break;
+    if (item.getItemId() == android.R.id.home) {
+      finish();
     }
     return true;
   }

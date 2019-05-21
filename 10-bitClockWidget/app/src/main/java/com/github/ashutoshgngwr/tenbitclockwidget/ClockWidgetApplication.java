@@ -25,7 +25,7 @@ public class ClockWidgetApplication extends Application {
 
   private static ClockWidgetApplication mInstance;
 
-  public static Context getContext() {
+  static Context getContext() {
     return mInstance.getApplicationContext();
   }
 

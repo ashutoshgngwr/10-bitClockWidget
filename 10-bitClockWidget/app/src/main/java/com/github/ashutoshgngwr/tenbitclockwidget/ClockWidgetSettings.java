@@ -20,11 +20,11 @@ package com.github.ashutoshgngwr.tenbitclockwidget;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class ClockWidgetSettings {
+class ClockWidgetSettings {
 
   private static SharedPreferences sharedPreferencesInstance;
 
-  protected static int getDotSize() {
+  static int getDotSize() {
     return Integer.parseInt(getPreferences().getString("dot_size", "0"));
   }
 
@@ -37,19 +37,19 @@ public class ClockWidgetSettings {
     return sharedPreferencesInstance;
   }
 
-  protected static boolean shouldDisplaySeparator() {
+  static boolean shouldDisplaySeparator() {
     return getPreferences().getBoolean("display_separator", false);
   }
 
-  protected static int getClockAMColor() {
+  static int getClockAMColor() {
     return getPreferences().getInt("am_color", 0);
   }
 
-  protected static int getClockPMColor() {
+  static int getClockPMColor() {
     return getPreferences().getInt("pm_color", 0);
   }
 
-  protected static int getClockBackgroundColor() {
+  static int getClockBackgroundColor() {
     return getPreferences().getInt("background_color", 0);
   }
 }
