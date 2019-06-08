@@ -18,6 +18,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="com.github.ashutoshgngwr.tenbitclockwidget">
 
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
   <!-- To publish apk on Samsung Apps. -->
   <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
