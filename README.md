@@ -1,5 +1,6 @@
 # 10-bitClockWidget
 [![Build Status](https://travis-ci.org/ashutoshgngwr/10-bitClockWidget.svg?branch=master)](https://travis-ci.org/ashutoshgngwr/10-bitClockWidget)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dce359a87af8413abb34f3620ef9c205)](https://www.codacy.com/app/ashutoshgngwr/10-bitClockWidget?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ashutoshgngwr/10-bitClockWidget&amp;utm_campaign=Badge_Grade)
 
 **Me:** 10-bit Clock Widget uses 10 binary dots and their color to represent current time in
 12-hour format.  
