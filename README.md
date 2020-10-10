@@ -12,7 +12,14 @@
 <img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/docs/assets/screenshot_1.png" title="Screenshot" alt="screenshot" width="200"/>  <img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/docs/assets/screenshot_2.png" title="Screenshot" alt="screenshot" width="250"/>
 
 ## Download
-<a href="https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.tenbitclockwidget" target="_blank" title="Get it on Google Play"><img src="https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/docs/assets/google_play_badge.png" alt="Get it on Google Play" width="200"/></a>  
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.github.ashutoshgngwr.tenbitclockwidget/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.tenbitclockwidget)
+
 Alternatively, you can download the latest release [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases/latest) on Github. All other versions including latest release, are also available [on Github](https://github.com/ashutoshgngwr/10-bitClockWidget/releases).
 
 ## Dependencies
