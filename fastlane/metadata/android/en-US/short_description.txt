@@ -1,1 +1,1 @@
-View your home screen clock in bits.
+A beautiful BCD clock for your homescreen

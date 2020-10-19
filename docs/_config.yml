@@ -1,6 +1,7 @@
-theme: jekyll-theme-architect
+theme: jekyll-theme-minimal
 title: 10-bit Clock Widget
 description: 10-bit Clock Widget uses 10 binary dots and their color to represent current time in 12-hour format.
+logo: https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/fastlane/metadata/android/en-US/images/icon.png
 show_downloads: true
 google_analytics: UA-88871509-1
 

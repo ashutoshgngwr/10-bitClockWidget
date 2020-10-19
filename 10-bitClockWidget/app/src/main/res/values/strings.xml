@@ -29,7 +29,7 @@
   <string name="pm_time_color">P.M. time color</string>
   <string name="summary_pm_time_color">Clock\'s color after midday</string>
   <string name="clock_background_color">Clock\'s background color</string>
-  <string name="service_notification__description">Background service is running to update the clock.</string>
+  <string name="service_notification__description">Background service is running to update the clock widget. Long press to hide this notification forever!</string>
   <string name="notification_channel_default__name">Clock Update Service</string>
-  <string name="notification_channel_default__description">Notifications to keep the background service alive for updating the clock. You can disable notifications from this channel permanently.</string>
+  <string name="notification_channel_default__description">Notifications to keep the background service alive for updating the clock. You may disable notifications from this channel permanently.</string>
 </resources>
