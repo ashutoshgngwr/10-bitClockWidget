@@ -23,6 +23,12 @@
   <!-- To publish apk on Samsung Apps. -->
   <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
 
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.SET_ALARM" />
+    </intent>
+  </queries>
+
   <application
     android:name=".ClockWidgetApplication"
     android:allowBackup="true"
