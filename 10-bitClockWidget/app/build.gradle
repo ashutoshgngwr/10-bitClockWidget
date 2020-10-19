@@ -26,7 +26,6 @@ android {
     targetSdkVersion 30
     versionCode 161
     versionName "1.6-1"
-    setProperty("archivesBaseName", "10-bitClockWidget")
   }
   buildTypes {
     release {

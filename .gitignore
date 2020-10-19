@@ -23,3 +23,7 @@ build/
 
 #java keystore files
 *.jks
+
+# fastlane stuff
+fastlane/report.xml
+fastlane/Preview.html

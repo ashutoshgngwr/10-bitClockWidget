@@ -1,0 +1,77 @@
+name: Android
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "**"
+    paths:
+      - "10-bitClockWidget/**"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "10-bitClockWidget/**"
+
+jobs:
+  assemble:
+    name: Assemble
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - run: ./10-bitClockWidget/gradlew -p ./10-bitClockWidget assembleDebug
+
+  deploy:
+    name: Deploy
+    if: github.repository == 'ashutoshgngwr/10-bitClockWidget' && github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    needs: [assemble]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow --tags -f
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - run: >-
+          echo "$SERVICE_ACCOUNT_KEY" > service-account-key.json;
+          echo "$JKS_STORE" | base64 --decode > keystore.jks;
+        env:
+          SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+          JKS_STORE: ${{ secrets.JKS_STORE }}
+      - run: fastlane deploy
+        env:
+          STORE_PASSWORD: ${{ secrets.JKS_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.JKS_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.JKS_ALIAS_PASSWORD }}
+      - id: get_tag_message
+        run: >-
+          TAG_BODY="$(git tag  --list --format='%(contents:body)' ${GITHUB_REF/'refs/tags/'/''})";
+          TAG_BODY="${TAG_BODY//'%'/'%25'}";
+          TAG_BODY="${TAG_BODY//$'\n'/'%0A'}";
+          TAG_BODY="${TAG_BODY//$'\r'/'%0D'}";
+          echo "::set-output name=message::${TAG_BODY}";
+      - id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body: ${{ steps.get_tag_message.outputs.message }}
+          draft: false
+          prerelease: false
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./10-bitClockWidget/app/build/outputs/apk/release/app-release.apk
+          asset_name: 10-bitClockWidget-release.apk
+          asset_content_type: application/zip
+      - if: ${{ always() }}
+        run: rm -f service-account-key.json keystore.jks
