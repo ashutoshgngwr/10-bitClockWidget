@@ -18,7 +18,11 @@ layout: default
      alt="Get it on Google Play"
      height="80">](https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.tenbitclockwidget)
 
-Alternatively, you can download the latest release [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases/latest) on Github. All other versions including latest release, are also available [on Github](https://github.com/ashutoshgngwr/10-bitClockWidget/releases).
+Alternatively, you can download the latest release [here](https://github.com/ashutoshgngwr/10-bitClockWidget/releases/latest) on GitHub. All other versions including the latest release, are also available [on Github](https://github.com/ashutoshgngwr/10-bitClockWidget/releases).
+
+## Privacy Policy
+
+10-bit Clock Widget does not collect any data from its users.
 
 ## License
 
