@@ -17,8 +17,6 @@
 
 <resources>
   <string name="app_name">10-bit Clock Widget</string>
-  <string name="clock_update_frequency">Clock update frequency</string>
-  <string name="misc_options">Misc options</string>
   <string name="appearance">Appearance</string>
   <string name="extras">Extras</string>
   <string name="help">Help</string>
@@ -31,7 +29,6 @@
   <string name="pm_time_color">P.M. time color</string>
   <string name="summary_pm_time_color">Clock\'s color after midday</string>
   <string name="clock_background_color">Clock\'s background color</string>
-  <string name="select">Select</string>
   <string name="service_notification__description">Background service is running to update the clock.</string>
   <string name="notification_channel_default__name">Clock Update Service</string>
   <string name="notification_channel_default__description">Notifications to keep the background service alive for updating the clock. You can disable notifications from this channel permanently.</string>

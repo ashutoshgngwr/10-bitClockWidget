@@ -29,7 +29,7 @@ import androidx.preference.PreferenceFragmentCompat;
 public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
     implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-  private Preference.OnPreferenceClickListener extrasPreferenceClickListener
+  private final Preference.OnPreferenceClickListener extrasPreferenceClickListener
       = new Preference.OnPreferenceClickListener() {
     @Override
     public boolean onPreferenceClick(Preference preference) {
@@ -53,13 +53,16 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
   public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     setPreferencesFromResource(R.xml.widget_preference, rootKey);
 
-    ListPreference dotSize = (ListPreference) findPreference("dot_size");
+    ListPreference dotSize = findPreference("dot_size");
+    assert dotSize != null;
     dotSize.setSummary(dotSize.getEntry());
 
     Preference about = findPreference("about");
+    assert about != null;
     about.setOnPreferenceClickListener(extrasPreferenceClickListener);
 
     Preference help = findPreference("help");
+    assert help != null;
     help.setOnPreferenceClickListener(extrasPreferenceClickListener);
   }
 

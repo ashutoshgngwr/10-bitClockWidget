@@ -24,4 +24,4 @@
   android:minWidth="@dimen/widget_width"
   android:previewImage="@drawable/preview"
   android:resizeMode="horizontal|vertical"
-  android:updatePeriodMillis="0"></appwidget-provider>
+  android:updatePeriodMillis="0" />

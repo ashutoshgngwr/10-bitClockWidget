@@ -42,7 +42,7 @@ public class ClockWidgetUpdateService extends Service implements Runnable {
   private static final String NOTIFICATION_CHANNEL_ID = "default";
 
   private Handler mHandler;
-  private BroadcastReceiver mUpdateReceiver = new ClockWidgetProvider();
+  private final BroadcastReceiver mUpdateReceiver = new ClockWidgetProvider();
 
   private static volatile boolean isRunning = false;
 

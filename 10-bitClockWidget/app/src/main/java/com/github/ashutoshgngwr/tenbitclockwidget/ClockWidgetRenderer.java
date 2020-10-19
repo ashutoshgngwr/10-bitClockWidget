@@ -22,10 +22,10 @@ class ClockWidgetRenderer {
 
   private static ClockWidgetRenderer mInstance;
 
-  private int width = getDimen(R.dimen.widget_width);
-  private int height = getDimen(R.dimen.widget_height);
-  private Paint mPaint;
-  private Bitmap clockBitmap;
+  private final int width = getDimen(R.dimen.widget_width);
+  private final int height = getDimen(R.dimen.widget_height);
+  private final Paint mPaint;
+  private final Bitmap clockBitmap;
 
   static Bitmap renderBitmap() {
     if (mInstance == null) {
