@@ -1,10 +1,74 @@
-theme: jekyll-theme-minimal
-title: 10-bit Clock Widget
-description: 10-bit Clock Widget uses 10 binary dots and their color to represent current time in 12-hour format.
-logo: https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/fastlane/metadata/android/en-US/images/icon.png
-show_downloads: true
-google_analytics: UA-88871509-1
+############################
+### Jekyll Configuration ###
+############################
 
-github:
-  owner_name: Ashutosh Gangwar
-  owner_url: https://ashutoshgngwr.github.io
+remote_theme: "ashutoshgngwr/automatic-app-landing-page"
+plugins:
+  - jekyll-remote-theme
+
+# Set the Sass partials directory, as we're using @imports
+sass:
+  style: :compressed # You might prefer to minify using :compressed
+
+# Exclude these files from your production _site
+exclude:
+  - README.md
+  - CNAME
+
+# Markdown rendering
+markdown: kramdown
+
+baseurl: /10-bitClockWidget
+permalink: /:path
+
+############################
+### Theme Configuration ###
+############################
+
+page_title: 10-bit Clock for Android
+playstore_link: https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.tenbitclockwidget
+fdroid_link: https://f-droid.org/packages/com.github.ashutoshgngwr.tenbitclockwidget/
+
+app_icon: https://raw.githubusercontent.com/ashutoshgngwr/10-bitClockWidget/master/fastlane/metadata/android/en-US/images/icon.png
+app_name: 10-bit Clock Widget
+app_price: Free
+app_description: A beautiful BCD clock for your homescreen.
+
+enable_smart_app_banner: false # Set to true to show a smart app banner at top of page on mobile devices.
+
+your_name: Ashutosh Gangwar
+your_link: https://ashutoshgngwr.github.io
+your_city: Bengaluru, India
+email_address: ashutoshgngwr@gmail.com
+twitter_username: ashutoshgngwr
+github_username: ashutoshgngwr
+
+# Theme Settings
+topbar_color: "#000000"
+topbar_transparency: 0.33
+topbar_title_color: "#ffffff"
+
+cover_image: /assets/headerimage.png # Replace with alternative image path or image URL.
+cover_overlay_color: "#363b3d"
+cover_overlay_transparency: 0.75
+
+device_color: black # Set to: blue, black, yellow, coral or white.
+
+body_background_color: "#ffffff"
+
+link_color: "#1d63ea"
+
+app_title_color: "#ffffff"
+app_price_color: "#ffffff"
+app_description_color: "#ffffff"
+
+feature_title_color: "#000000"
+feature_text_color: "#666666"
+
+feature_icons_foreground_color: "#1d63ea"
+feature_icons_background_color: "#e6e6e6"
+
+social_icons_foreground_color: "#666666"
+social_icons_background_color: "#e6e6e6"
+
+footer_text_color: "#666666"
