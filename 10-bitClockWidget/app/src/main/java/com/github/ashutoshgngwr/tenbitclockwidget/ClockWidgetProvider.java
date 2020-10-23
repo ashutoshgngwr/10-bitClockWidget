@@ -23,11 +23,12 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.provider.AlarmClock;
 import android.util.Log;
 import android.widget.RemoteViews;
+
+import androidx.core.content.ContextCompat;
 
 public class ClockWidgetProvider extends AppWidgetProvider {
 
@@ -73,11 +74,7 @@ public class ClockWidgetProvider extends AppWidgetProvider {
     }
 
     Log.d(TAG, "Start widget update service...");
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      context.startForegroundService(new Intent(context, ClockWidgetUpdateService.class));
-    } else {
-      context.startService(new Intent(context, ClockWidgetUpdateService.class));
-    }
+    ContextCompat.startForegroundService(context, new Intent(context, ClockWidgetUpdateService.class));
   }
 
   @Override
@@ -86,12 +83,14 @@ public class ClockWidgetProvider extends AppWidgetProvider {
     context.stopService(new Intent(context, ClockWidgetUpdateService.class));
   }
 
-  // Creates PendingIntent for default activity of default clock application
+  // Creates PendingIntent for default activity of default alarm clock application
   private PendingIntent createOnClickPendingIntent(Context context) {
-    Intent openClockIntent = new Intent(AlarmClock.ACTION_SET_ALARM);
-    ActivityInfo clockInfo = context.getPackageManager().resolveActivity(openClockIntent, 0).activityInfo;
-    return PendingIntent.getActivity(context, RC_OPEN_CLOCK,
-        context.getPackageManager().getLaunchIntentForPackage(clockInfo.packageName),
-        PendingIntent.FLAG_CANCEL_CURRENT);
+    return PendingIntent.getActivity(
+            context, RC_OPEN_CLOCK,
+            new Intent()
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .setAction(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+                            ? AlarmClock.ACTION_SHOW_ALARMS : AlarmClock.ACTION_SET_ALARM),
+            PendingIntent.FLAG_UPDATE_CURRENT);
   }
 }
