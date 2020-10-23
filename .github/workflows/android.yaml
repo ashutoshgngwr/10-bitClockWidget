@@ -76,5 +76,13 @@ jobs:
           asset_path: ./10-bitClockWidget/app/build/outputs/apk/release/app-release.apk
           asset_name: 10-bitClockWidget-release.apk
           asset_content_type: application/zip
+      - uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./10-bitClockWidget/app/build/outputs/mapping/release/mapping.txt
+          asset_name: retrace-mapping.txt
+          asset_content_type: text/plain
       - if: ${{ always() }}
         run: rm -f service-account-key.json keystore.jks

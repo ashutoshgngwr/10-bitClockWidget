@@ -27,3 +27,4 @@ build/
 # fastlane stuff
 fastlane/report.xml
 fastlane/Preview.html
+fastlane/README.md
