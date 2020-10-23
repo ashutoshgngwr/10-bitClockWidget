@@ -1,0 +1,2 @@
+- Fix potenial NPE crashes
+
