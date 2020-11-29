@@ -16,75 +16,75 @@
   -->
 <androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.preference.PreferenceCategory
-        app:iconSpaceReserved="false"
-        app:title="@string/appearance">
+  <androidx.preference.PreferenceCategory
+    app:iconSpaceReserved="false"
+    app:title="@string/appearance">
 
-        <androidx.preference.ListPreference
-            app:defaultValue="10"
-            app:entries="@array/pref_dot_size"
-            app:entryValues="@array/pref_dot_size_values"
-            app:iconSpaceReserved="false"
-            app:key="dot_size"
-            app:title="@string/dot_size" />
+    <androidx.preference.ListPreference
+      app:defaultValue="10"
+      app:entries="@array/pref_dot_size"
+      app:entryValues="@array/pref_dot_size_values"
+      app:iconSpaceReserved="false"
+      app:key="dot_size"
+      app:title="@string/dot_size" />
 
-        <androidx.preference.CheckBoxPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="24hour_format"
-            app:summary="@string/summary_twenty_four_hour_format"
-            app:title="@string/twenty_four_hour_format" />
+    <androidx.preference.CheckBoxPreference
+      app:defaultValue="false"
+      app:iconSpaceReserved="false"
+      app:key="24hour_format"
+      app:summary="@string/summary_twenty_four_hour_format"
+      app:title="@string/twenty_four_hour_format" />
 
-        <androidx.preference.CheckBoxPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="6bits_hour"
-            app:summary="@string/summary_six_bits_hour"
-            app:title="@string/six_bits_hour" />
+    <androidx.preference.CheckBoxPreference
+      app:defaultValue="false"
+      app:iconSpaceReserved="false"
+      app:key="6bits_hour"
+      app:summary="@string/summary_six_bits_hour"
+      app:title="@string/six_bits_hour" />
 
-        <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
-            app:defaultValue="#FF0F0F0F"
-            app:iconSpaceReserved="false"
-            app:key="am_color"
-            app:title="@string/am_time_color" />
+    <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
+      app:defaultValue="#FF0F0F0F"
+      app:iconSpaceReserved="false"
+      app:key="am_color"
+      app:title="@string/am_time_color" />
 
-        <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
-            app:defaultValue="#FFFCFCFC"
-            app:iconSpaceReserved="false"
-            app:key="pm_color"
-            app:summary="@string/summary_pm_time_color"
-            app:title="@string/pm_time_color" />
+    <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
+      app:defaultValue="#FFFCFCFC"
+      app:iconSpaceReserved="false"
+      app:key="pm_color"
+      app:summary="@string/summary_pm_time_color"
+      app:title="@string/pm_time_color" />
 
-        <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
-            alphaSlider="true"
-            app:defaultValue="#00000000"
-            app:iconSpaceReserved="false"
-            app:key="background_color"
-            app:title="@string/clock_background_color" />
+    <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
+      alphaSlider="true"
+      app:defaultValue="#00000000"
+      app:iconSpaceReserved="false"
+      app:key="background_color"
+      app:title="@string/clock_background_color" />
 
-        <androidx.preference.CheckBoxPreference
-            app:defaultValue="true"
-            app:iconSpaceReserved="false"
-            app:key="display_separator"
-            app:summary="@string/summary_display_separator"
-            app:title="@string/display_separator" />
+    <androidx.preference.CheckBoxPreference
+      app:defaultValue="true"
+      app:iconSpaceReserved="false"
+      app:key="display_separator"
+      app:summary="@string/summary_display_separator"
+      app:title="@string/display_separator" />
 
-    </androidx.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory
-        app:iconSpaceReserved="false"
-        app:title="@string/extras">
+  <androidx.preference.PreferenceCategory
+    app:iconSpaceReserved="false"
+    app:title="@string/extras">
 
-        <androidx.preference.Preference
-            app:iconSpaceReserved="false"
-            app:key="help"
-            app:title="@string/help" />
+    <androidx.preference.Preference
+      app:iconSpaceReserved="false"
+      app:key="help"
+      app:title="@string/help" />
 
-        <androidx.preference.Preference
-            app:iconSpaceReserved="false"
-            app:key="about"
-            app:title="@string/about" />
+    <androidx.preference.Preference
+      app:iconSpaceReserved="false"
+      app:key="about"
+      app:title="@string/about" />
 
-    </androidx.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

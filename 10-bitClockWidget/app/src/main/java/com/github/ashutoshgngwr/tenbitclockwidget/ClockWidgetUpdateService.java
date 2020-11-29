@@ -29,93 +29,91 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 
-import java.util.Calendar;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import java.util.Calendar;
+
 public class ClockWidgetUpdateService extends Service implements Runnable {
 
-  private static final int FOREGROUND_ID = 0x201;
-  private static final int RC_PREFERENCE_ACTIVITY = 0x827;
-  private static final String NOTIFICATION_CHANNEL_ID = "default";
+	private static final int FOREGROUND_ID = 0x201;
+	private static final int RC_PREFERENCE_ACTIVITY = 0x827;
+	private static final String NOTIFICATION_CHANNEL_ID = "default";
+	private static volatile boolean isRunning = false;
+	private final BroadcastReceiver mUpdateReceiver = new ClockWidgetProvider();
+	private Handler mHandler;
 
-  private Handler mHandler;
-  private final BroadcastReceiver mUpdateReceiver = new ClockWidgetProvider();
+	protected static boolean isRunning() {
+		return isRunning;
+	}
 
-  private static volatile boolean isRunning = false;
+	@Nullable
+	@Override
+	public IBinder onBind(Intent intent) {
+		return null;
+	}
 
-  protected static boolean isRunning() {
-    return isRunning;
-  }
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		createNotificationChannel();
+		startForeground(FOREGROUND_ID, createNotification());
+		run();
+		return START_STICKY;
+	}
 
-  @Nullable
-  @Override
-  public IBinder onBind(Intent intent) {
-    return null;
-  }
+	private Notification createNotification() {
+		return new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+			.setContentText(getString(R.string.service_notification__description))
+			.setContentIntent(
+				PendingIntent.getActivity(
+					this, RC_PREFERENCE_ACTIVITY,
+					new Intent(this, ClockWidgetPreferenceActivity.class),
+					PendingIntent.FLAG_UPDATE_CURRENT))
+			.setSmallIcon(R.drawable.ic_notification_default)
+			.build();
+	}
 
-  @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
-    createNotificationChannel();
-    startForeground(FOREGROUND_ID, createNotification());
-    run();
-    return START_STICKY;
-  }
+	private void createNotificationChannel() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			CharSequence name = getString(R.string.notification_channel_default__name);
+			String description = getString(R.string.notification_channel_default__description);
 
-  private Notification createNotification() {
-    return new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
-        .setContentText(getString(R.string.service_notification__description))
-        .setContentIntent(
-            PendingIntent.getActivity(
-                this, RC_PREFERENCE_ACTIVITY,
-                new Intent(this, ClockWidgetPreferenceActivity.class),
-                PendingIntent.FLAG_UPDATE_CURRENT))
-        .setSmallIcon(R.drawable.ic_notification_default)
-        .build();
-  }
+			int importance = NotificationManager.IMPORTANCE_MIN;
+			NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+			channel.setDescription(description);
+			channel.setShowBadge(false);
 
-  private void createNotificationChannel() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      CharSequence name = getString(R.string.notification_channel_default__name);
-      String description = getString(R.string.notification_channel_default__description);
+			NotificationManager notificationManager = getSystemService(NotificationManager.class);
+			assert notificationManager != null;
+			notificationManager.createNotificationChannel(channel);
+		}
+	}
 
-      int importance = NotificationManager.IMPORTANCE_MIN;
-      NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
-      channel.setDescription(description);
-      channel.setShowBadge(false);
+	@Override
+	public void onCreate() {
+		isRunning = true;
+		mHandler = new Handler();
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(ClockWidgetProvider.ACTION_UPDATE_CLOCK);
+		LocalBroadcastManager.getInstance(this).registerReceiver(mUpdateReceiver, intentFilter);
+	}
 
-      NotificationManager notificationManager = getSystemService(NotificationManager.class);
-      assert notificationManager != null;
-      notificationManager.createNotificationChannel(channel);
-    }
-  }
+	@Override
+	public void onDestroy() {
+		mHandler.removeCallbacks(this);
+		LocalBroadcastManager.getInstance(this).unregisterReceiver(mUpdateReceiver);
+		isRunning = false;
+	}
 
-  @Override
-  public void onCreate() {
-    isRunning = true;
-    mHandler = new Handler();
-    IntentFilter intentFilter = new IntentFilter();
-    intentFilter.addAction(ClockWidgetProvider.ACTION_UPDATE_CLOCK);
-    LocalBroadcastManager.getInstance(this).registerReceiver(mUpdateReceiver, intentFilter);
-  }
-
-  @Override
-  public void onDestroy() {
-    mHandler.removeCallbacks(this);
-    LocalBroadcastManager.getInstance(this).unregisterReceiver(mUpdateReceiver);
-    isRunning = false;
-  }
-
-  @Override
-  public void run() {
-    LocalBroadcastManager
-        .getInstance(this)
-        .sendBroadcast(new Intent(ClockWidgetProvider.ACTION_UPDATE_CLOCK));
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(Calendar.SECOND, 0);
-    calendar.add(Calendar.MINUTE, 1);
-    mHandler.postDelayed(this, calendar.getTimeInMillis() - System.currentTimeMillis());
-  }
+	@Override
+	public void run() {
+		LocalBroadcastManager
+			.getInstance(this)
+			.sendBroadcast(new Intent(ClockWidgetProvider.ACTION_UPDATE_CLOCK));
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.SECOND, 0);
+		calendar.add(Calendar.MINUTE, 1);
+		mHandler.postDelayed(this, calendar.getTimeInMillis() - System.currentTimeMillis());
+	}
 }

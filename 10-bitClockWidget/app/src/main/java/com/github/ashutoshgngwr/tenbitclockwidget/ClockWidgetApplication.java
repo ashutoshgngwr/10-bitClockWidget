@@ -24,18 +24,18 @@ import androidx.preference.PreferenceManager;
 
 public class ClockWidgetApplication extends Application {
 
-  private static ClockWidgetApplication mInstance;
+	private static ClockWidgetApplication mInstance;
 
-  static Context getContext() {
-    return mInstance.getApplicationContext();
-  }
+	static Context getContext() {
+		return mInstance.getApplicationContext();
+	}
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    mInstance = this;
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		mInstance = this;
 
-    // Load default values from widget_preference.xml file to shared preferences.
-    PreferenceManager.setDefaultValues(this, R.xml.widget_preference, false);
-  }
+		// Load default values from widget_preference.xml file to shared preferences.
+		PreferenceManager.setDefaultValues(this, R.xml.widget_preference, false);
+	}
 }
