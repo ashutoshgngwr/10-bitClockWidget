@@ -8,9 +8,9 @@ import android.graphics.RectF;
 import android.util.Log;
 import android.util.TypedValue;
 
-import java.util.Calendar;
-
 import androidx.annotation.DimenRes;
+
+import java.util.Calendar;
 
 class ClockWidgetRenderer {
 
@@ -24,8 +24,10 @@ class ClockWidgetRenderer {
 
   private final int width = getDimen(R.dimen.widget_width);
   private final int height = getDimen(R.dimen.widget_height);
+  private final int padding = px(10);
   private final Paint mPaint;
   private final Bitmap clockBitmap;
+  private final Canvas canvas;
 
   static Bitmap renderBitmap() {
     if (mInstance == null) {
@@ -38,7 +40,7 @@ class ClockWidgetRenderer {
 
   private ClockWidgetRenderer() {
     clockBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
+    canvas = new Canvas(clockBitmap);
     mPaint = new Paint();
     mPaint.setAntiAlias(true);
     mPaint.setStyle(Paint.Style.FILL);
@@ -57,66 +59,61 @@ class ClockWidgetRenderer {
     clearClockBitmap();
 
     Calendar calendar = Calendar.getInstance();
-    int hour = calendar.get(Calendar.HOUR);
-    int minute = calendar.get(Calendar.MINUTE);
-    int period = calendar.get(Calendar.AM_PM);
-    int dot_radius = px(ClockWidgetSettings.getDotSize());
-    int dot_size = dot_radius * 2;
-    int dotSpacingX = (width - dot_size * 5 - px(5)) / 6;
-    int dotSpacingY = (height - dot_size * 2) / 3; // same as X
+    final boolean is24Hour = ClockWidgetSettings.shouldUse24HourFormat();
+    final int nHourBits = is24Hour ? ClockWidgetSettings.shouldUse6bitsForHour() ? 6 : 5 : 4;
+    final int hour = calendar.get(is24Hour ? Calendar.HOUR_OF_DAY : Calendar.HOUR);
+    final int minute = calendar.get(Calendar.MINUTE);
+    final int period = calendar.get(Calendar.AM_PM);
 
-    Canvas canvas = new Canvas(clockBitmap);
+    final float sx = width * (is24Hour ? 0.5f : 0.4f);
+    final float sp = px(5);
 
     // set clock's background color.
     mPaint.setColor(ClockWidgetSettings.getClockBackgroundColor());
-    canvas.drawRoundRect(new RectF(0, 0, width - 1, height - 1), px(5), px(5), mPaint);
+    canvas.drawRoundRect(new RectF(0, 0, width, height), px(5), px(5), mPaint);
 
     // set clock's color based on time.
-    mPaint.setColor(period == Calendar.AM
+    mPaint.setColor(is24Hour || period == Calendar.AM
         ? ClockWidgetSettings.getClockAMColor() : ClockWidgetSettings.getClockPMColor());
 
-    for (int i = 0; i < 4; i++) {
-      if ((hour >> i & 1) == 1)
-        mPaint.setAlpha(BIT_ALPHA_ACTIVE);
-      else
-        mPaint.setAlpha(BIT_ALPHA_INACTIVE);
+    RectF bounds = new RectF(padding, padding, sx - sp, height - padding);
+    renderBits(bounds, 2, is24Hour ? 3 : 2, nHourBits, hour);
 
-      // cx = paddingX + (width + spacing of previous dots) + radius of current dot
-      // cy = paddingY + radius of dot [for line 1],
-      // cy = paddingY + radius of dot + height of line 1 + dotSpacingY [for line 2]
-      canvas.drawCircle(dotSpacingX + (1 - i % 2) * (dot_size + dotSpacingX) + dot_radius,
-          dotSpacingY + dot_radius + (i / 2 == 0 ? dotSpacingY + dot_size : 0),
-          dot_radius, mPaint);
-    }
-
-    // cx = padding + width of 2 dots + spacing of 2 dots + 5dp (separator padding + width)
-    int marginX = dotSpacingX + (dot_size + dotSpacingX) * 2 + px(5);
-
-    for (int i = 0; i < 6; i++) {
-      if ((minute >> i & 1) == 1)
-        mPaint.setAlpha(BIT_ALPHA_ACTIVE);
-      else
-        mPaint.setAlpha(BIT_ALPHA_INACTIVE);
-
-      // cx = marginX + (width + spacing of previous dots) + radius of current dot.
-      // cy = paddingY + radius of dot [for line 1]
-      // cy = paddingY + radius of dot + height of line 1 + dotSpacingY [for line 2]
-      canvas.drawCircle(marginX + (2 - i % 3) * (dot_size + dotSpacingX) + dot_radius,
-          dotSpacingY + dot_radius + (i / 3 == 0 ? dotSpacingY + dot_size : 0),
-          dot_radius, mPaint);
-    }
+    bounds.set(sx + sp, padding, width - padding, height - padding);
+    renderBits(bounds, 2, 3, 6, minute);
 
     if (ClockWidgetSettings.shouldDisplaySeparator()) {
-      float x1 = dotSpacingX + dot_size * 2 + dotSpacingX * 1.5F + px(2);
-
       mPaint.setAlpha(SEPARATOR_LINE_ALPHA);
-
-      // from center-axis of line 1's dot to center-axis of line 2's dot
-      canvas.drawLine(x1, dotSpacingY + dot_radius, x1,
-          dotSpacingY + dot_radius + dotSpacingY + dot_size, mPaint);
+      canvas.drawLine(sx, height * 0.35f, sx, height * 0.65f, mPaint);
     }
 
     return clockBitmap;
+  }
+
+  @SuppressWarnings("SameParameterValue")
+  private void renderBits(RectF bounds, int rows, int cols, int nBits, int bits) {
+    final float dr = px(ClockWidgetSettings.getDotSize());
+    final float cw = bounds.width() / cols;
+    final float ch = bounds.height() / rows;
+    final float cpx = (cw - (dr * 2)) / 2;
+    final float cpy = (ch - (dr * 2)) / 2;
+    float x = bounds.right;
+    float y = bounds.bottom;
+
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        if (--nBits < 0) {
+            continue;
+        }
+
+        mPaint.setAlpha((bits >> ((i * cols) + j) & 1) == 1 ? BIT_ALPHA_ACTIVE : BIT_ALPHA_INACTIVE);
+        canvas.drawCircle(x - cpx - dr, y - cpy - dr, dr, mPaint);
+        x -= cw;
+      }
+
+      x = bounds.right;
+      y -= ch;
+    }
   }
 
   private int px(int dp) {

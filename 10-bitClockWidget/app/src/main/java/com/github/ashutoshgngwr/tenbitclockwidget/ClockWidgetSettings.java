@@ -25,10 +25,6 @@ class ClockWidgetSettings {
 
   private static SharedPreferences sharedPreferencesInstance;
 
-  static int getDotSize() {
-    return Integer.parseInt(getPreferences().getString("dot_size", "0"));
-  }
-
   private static SharedPreferences getPreferences() {
     if (sharedPreferencesInstance == null) {
       sharedPreferencesInstance = PreferenceManager.getDefaultSharedPreferences(
@@ -38,8 +34,20 @@ class ClockWidgetSettings {
     return sharedPreferencesInstance;
   }
 
+  static int getDotSize() {
+    return Integer.parseInt(getPreferences().getString("dot_size", "0"));
+  }
+
   static boolean shouldDisplaySeparator() {
     return getPreferences().getBoolean("display_separator", false);
+  }
+
+  static boolean shouldUse24HourFormat() {
+    return getPreferences().getBoolean("24hour_format", false);
+  }
+
+  static boolean shouldUse6bitsForHour() {
+    return getPreferences().getBoolean("6bits_hour", false);
   }
 
   static int getClockAMColor() {

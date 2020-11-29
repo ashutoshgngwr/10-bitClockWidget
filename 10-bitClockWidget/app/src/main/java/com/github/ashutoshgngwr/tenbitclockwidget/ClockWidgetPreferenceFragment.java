@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -64,6 +65,25 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
     Preference help = findPreference("help");
     assert help != null;
     help.setOnPreferenceClickListener(extrasPreferenceClickListener);
+
+    CheckBoxPreference tfHourFormat = findPreference("24hour_format");
+    assert tfHourFormat != null;
+    tfHourFormat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+      @Override
+      public boolean onPreferenceChange(Preference preference, Object newValue) {
+        boolean isTFEnabled = (Boolean) newValue;
+        Preference pmColor = findPreference("pm_color");
+        assert pmColor != null;
+        pmColor.setEnabled(!isTFEnabled);
+
+        Preference sixBitsHour = findPreference("6bits_hour");
+        assert  sixBitsHour != null;
+        sixBitsHour.setEnabled(isTFEnabled);
+        return true;
+      }
+    });
+
+    tfHourFormat.callChangeListener(tfHourFormat.isChecked());
   }
 
   // Listening for changes in SharedPreferences to get updated values of ListPreference.
