@@ -32,65 +32,63 @@ import androidx.core.content.ContextCompat;
 
 public class ClockWidgetProvider extends AppWidgetProvider {
 
-  private static final String TAG = ClockWidgetProvider.class.getSimpleName();
+	protected static final String ACTION_UPDATE_CLOCK = "action_update_clock";
+	private static final String TAG = ClockWidgetProvider.class.getSimpleName();
+	private static final int RC_OPEN_CLOCK = 0x12;
 
-  private static final int RC_OPEN_CLOCK = 0x12;
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()) || ACTION_UPDATE_CLOCK.equals(intent.getAction()))
+			onUpdate(context, AppWidgetManager.getInstance(context), null);
+		else
+			super.onReceive(context, intent);
+	}
 
-  protected static final String ACTION_UPDATE_CLOCK = "action_update_clock";
+	@Override
+	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+		// get widget ids for all available instances
+		int[] ids = appWidgetManager.getAppWidgetIds(
+			new ComponentName(context.getPackageName(), getClass().getName()));
 
-  @Override
-  public void onReceive(Context context, Intent intent) {
-    if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()) || ACTION_UPDATE_CLOCK.equals(intent.getAction()))
-      onUpdate(context, AppWidgetManager.getInstance(context), null);
-    else
-      super.onReceive(context, intent);
-  }
+		if (ids.length == 0) {
+			Log.d(TAG, "Nothing to update... Bailing out!");
+			return; // No widget is added to home screen. Bailing out!
+		}
 
-  @Override
-  public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-    // get widget ids for all available instances
-    int[] ids = appWidgetManager.getAppWidgetIds(
-        new ComponentName(context.getPackageName(), getClass().getName()));
+		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.clock_widget_layout);
+		remoteViews.setImageViewBitmap(R.id.iv_clock, ClockWidgetRenderer.renderBitmap());
+		remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent(context));
+		appWidgetManager.updateAppWidget(ids, remoteViews);
+		Log.d(TAG, "Finished updating widget!");
 
-    if (ids.length == 0) {
-      Log.d(TAG, "Nothing to update... Bailing out!");
-      return; // No widget is added to home screen. Bailing out!
-    }
+		// start clock update service if it wasn't running already.
+		onEnabled(context);
+	}
 
-    RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.clock_widget_layout);
-    remoteViews.setImageViewBitmap(R.id.iv_clock, ClockWidgetRenderer.renderBitmap());
-    remoteViews.setOnClickPendingIntent(R.id.iv_clock, createOnClickPendingIntent(context));
-    appWidgetManager.updateAppWidget(ids, remoteViews);
-    Log.d(TAG, "Finished updating widget!");
+	@Override
+	public void onEnabled(Context context) {
+		if (ClockWidgetUpdateService.isRunning()) {
+			return;
+		}
 
-    // start clock update service if it wasn't running already.
-    onEnabled(context);
-  }
+		Log.d(TAG, "Start widget update service...");
+		ContextCompat.startForegroundService(context, new Intent(context, ClockWidgetUpdateService.class));
+	}
 
-  @Override
-  public void onEnabled(Context context) {
-    if (ClockWidgetUpdateService.isRunning()) {
-      return;
-    }
+	@Override
+	public void onDisabled(Context context) {
+		Log.d(TAG, "Stopping widget update service...");
+		context.stopService(new Intent(context, ClockWidgetUpdateService.class));
+	}
 
-    Log.d(TAG, "Start widget update service...");
-    ContextCompat.startForegroundService(context, new Intent(context, ClockWidgetUpdateService.class));
-  }
-
-  @Override
-  public void onDisabled(Context context) {
-    Log.d(TAG, "Stopping widget update service...");
-    context.stopService(new Intent(context, ClockWidgetUpdateService.class));
-  }
-
-  // Creates PendingIntent for default activity of default alarm clock application
-  private PendingIntent createOnClickPendingIntent(Context context) {
-    return PendingIntent.getActivity(
-            context, RC_OPEN_CLOCK,
-            new Intent()
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    .setAction(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-                            ? AlarmClock.ACTION_SHOW_ALARMS : AlarmClock.ACTION_SET_ALARM),
-            PendingIntent.FLAG_UPDATE_CURRENT);
-  }
+	// Creates PendingIntent for default activity of default alarm clock application
+	private PendingIntent createOnClickPendingIntent(Context context) {
+		return PendingIntent.getActivity(
+			context, RC_OPEN_CLOCK,
+			new Intent()
+				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+				.setAction(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+					? AlarmClock.ACTION_SHOW_ALARMS : AlarmClock.ACTION_SET_ALARM),
+			PendingIntent.FLAG_UPDATE_CURRENT);
+	}
 }

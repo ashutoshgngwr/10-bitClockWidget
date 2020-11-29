@@ -28,11 +28,24 @@
       app:key="dot_size"
       app:title="@string/dot_size" />
 
+    <androidx.preference.CheckBoxPreference
+      app:defaultValue="false"
+      app:iconSpaceReserved="false"
+      app:key="24hour_format"
+      app:summary="@string/summary_twenty_four_hour_format"
+      app:title="@string/twenty_four_hour_format" />
+
+    <androidx.preference.CheckBoxPreference
+      app:defaultValue="false"
+      app:iconSpaceReserved="false"
+      app:key="6bits_hour"
+      app:summary="@string/summary_six_bits_hour"
+      app:title="@string/six_bits_hour" />
+
     <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
       app:defaultValue="#FF0F0F0F"
       app:iconSpaceReserved="false"
       app:key="am_color"
-      app:summary="@string/summary_am_time_color"
       app:title="@string/am_time_color" />
 
     <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference

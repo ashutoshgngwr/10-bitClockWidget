@@ -23,34 +23,42 @@ import androidx.preference.PreferenceManager;
 
 class ClockWidgetSettings {
 
-  private static SharedPreferences sharedPreferencesInstance;
+	private static SharedPreferences sharedPreferencesInstance;
 
-  static int getDotSize() {
-    return Integer.parseInt(getPreferences().getString("dot_size", "0"));
-  }
+	private static SharedPreferences getPreferences() {
+		if (sharedPreferencesInstance == null) {
+			sharedPreferencesInstance = PreferenceManager.getDefaultSharedPreferences(
+				ClockWidgetApplication.getContext());
+		}
 
-  private static SharedPreferences getPreferences() {
-    if (sharedPreferencesInstance == null) {
-      sharedPreferencesInstance = PreferenceManager.getDefaultSharedPreferences(
-          ClockWidgetApplication.getContext());
-    }
+		return sharedPreferencesInstance;
+	}
 
-    return sharedPreferencesInstance;
-  }
+	static int getDotSize() {
+		return Integer.parseInt(getPreferences().getString("dot_size", "0"));
+	}
 
-  static boolean shouldDisplaySeparator() {
-    return getPreferences().getBoolean("display_separator", false);
-  }
+	static boolean shouldDisplaySeparator() {
+		return getPreferences().getBoolean("display_separator", false);
+	}
 
-  static int getClockAMColor() {
-    return getPreferences().getInt("am_color", 0);
-  }
+	static boolean shouldUse24HourFormat() {
+		return getPreferences().getBoolean("24hour_format", false);
+	}
 
-  static int getClockPMColor() {
-    return getPreferences().getInt("pm_color", 0);
-  }
+	static boolean shouldUse6bitsForHour() {
+		return getPreferences().getBoolean("6bits_hour", false);
+	}
 
-  static int getClockBackgroundColor() {
-    return getPreferences().getInt("background_color", 0);
-  }
+	static int getClockAMColor() {
+		return getPreferences().getInt("am_color", 0);
+	}
+
+	static int getClockPMColor() {
+		return getPreferences().getInt("pm_color", 0);
+	}
+
+	static int getClockBackgroundColor() {
+		return getPreferences().getInt("background_color", 0);
+	}
 }
