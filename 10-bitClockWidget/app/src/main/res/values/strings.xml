@@ -35,4 +35,6 @@
   <string name="summary_twenty_four_hour_format">The widget will need at least 11 bits on enabling 24-hour format.</string>
   <string name="six_bits_hour">Use 6 bits for hour</string>
   <string name="summary_six_bits_hour">To fill empty space, the widget will use 6 bits to represent hour instead of 5.</string>
+  <string name="about_page_url">file:///android_asset/about.html</string>
+  <string name="help_page_url">file:///android_asset/help.html</string>
 </resources>

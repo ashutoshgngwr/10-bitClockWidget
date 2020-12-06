@@ -1,0 +1,40 @@
+<!--
+  ~     Copyright (C) 2017  Ashutosh Gangwar
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+  <string name="app_name">10-bit Saat Aracı</string>
+  <string name="appearance">Görünüş</string>
+  <string name="extras">Daha fazla</string>
+  <string name="help">Yardım</string>
+  <string name="about">Hakkında</string>
+  <string name="dot_size">Nokta büyüklüğü</string>
+  <string name="display_separator">Ayracı göster</string>
+  <string name="summary_display_separator">Saat ile dakika arasında ayırıcı bir çizgi göster.</string>
+  <string name="am_time_color">Nokta rengi</string>
+  <string name="pm_time_color">Alternatif nokta rengi</string>
+  <string name="summary_pm_time_color">Öğleden önce ve sonrayı ayırt etmek için öğleden sonra kullanılacak renk.</string>
+  <string name="clock_background_color">Arka plan rengi</string>
+  <string name="service_notification__description">Saati güncel tutmak için arka plan hizmeti çalışıyor. Bildirimi sonsuza dek kapatmak için bu bildirime uzun basın!</string>
+  <string name="notification_channel_default__name">Saat Güncelleme Hizmeti</string>
+  <string name="notification_channel_default__description">Saati güncel tutmak adına arka plan hizmetinin çalışmasını sağlamak için bildirim. Bildirimleri buradan kalıcı olarak devre dışı bırakabilirsiniz.</string>
+  <string name="twenty_four_hour_format">24 saat düzenini kullan</string>
+  <string name="summary_twenty_four_hour_format">Araç 24 saat düzenini kullanabilmek için en az 11 bit kullanmalıdır.</string>
+  <string name="six_bits_hour">Saat için 6 bit kullan</string>
+  <string name="summary_six_bits_hour">Boş yeri doldurmak adına saat için 5 yerine 6 bit kullanacaktır.</string>
+  <string name="about_page_url">file:///android_asset/about-tr.html</string>
+  <string name="help_page_url">file:///android_asset/help-tr.html</string>
+</resources>
