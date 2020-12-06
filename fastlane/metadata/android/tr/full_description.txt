@@ -1,0 +1,9 @@
+10-bit Saat Aracı ana sayfanız için mevcut saati onluk tabandan ikilik tabana dönüştürerek size sunar.
+
+<b>Özellikleri</b>
+- 12 saat düzeni (varsayılan)
+- 24 saat düzeni
+- İstediğiniz rengi kullanın
+
+10-bit Saat Aracı özgür ve açık kaynak kodlu bir yazılımdır.
+https://github.com/ashutoshgngwr/10-bitClockWidget
