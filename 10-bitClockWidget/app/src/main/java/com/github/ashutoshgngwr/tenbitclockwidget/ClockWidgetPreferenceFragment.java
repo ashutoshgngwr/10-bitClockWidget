@@ -38,10 +38,10 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
 
 			switch (preference.getKey()) {
 				case "about":
-					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "about.html");
+					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_URL_STRING_ID, R.string.about_page_url);
 					break;
 				case "help":
-					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_ASSET_FILE, "help.html");
+					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_URL_STRING_ID, R.string.help_page_url);
 					break;
 			}
 

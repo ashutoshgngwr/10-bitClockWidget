@@ -35,4 +35,6 @@
   <string name="summary_twenty_four_hour_format">Araç 24 saat düzenini kullanabilmek için en az 11 bit kullanmalıdır.</string>
   <string name="six_bits_hour">Saat için 6 bit kullan</string>
   <string name="summary_six_bits_hour">Boş yeri doldurmak adına saat için 5 yerine 6 bit kullanacaktır.</string>
+  <string name="about_page_url">file:///android_asset/about-tr.html</string>
+  <string name="help_page_url">file:///android_asset/help-tr.html</string>
 </resources>

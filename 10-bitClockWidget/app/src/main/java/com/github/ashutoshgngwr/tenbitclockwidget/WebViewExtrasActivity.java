@@ -33,7 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class WebViewExtrasActivity extends AppCompatActivity {
 
-	protected static final String EXTRA_ASSET_FILE = "asset_file";
+	protected static final String EXTRA_URL_STRING_ID = "url_string_id";
 
 	@SuppressLint("SetJavaScriptEnabled")
 	@Override
@@ -47,7 +47,10 @@ public class WebViewExtrasActivity extends AppCompatActivity {
 		webView.getSettings().setBuiltInZoomControls(false);
 		webView.getSettings().setJavaScriptEnabled(true);
 
-		webView.loadUrl("file:///android_asset/" + getIntent().getStringExtra(EXTRA_ASSET_FILE));
+		int resID = getIntent().getIntExtra(EXTRA_URL_STRING_ID, 0);
+		if (resID != 0) {
+			webView.loadUrl(getString(resID));
+		}
 
 		final ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
