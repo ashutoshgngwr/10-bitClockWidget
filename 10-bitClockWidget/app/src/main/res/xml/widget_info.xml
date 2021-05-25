@@ -16,7 +16,6 @@
   -->
 
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-  android:configure="com.github.ashutoshgngwr.tenbitclockwidget.ClockWidgetPreferenceActivity"
   android:initialLayout="@layout/clock_widget_layout"
   android:minWidth="@dimen/widget_width"
   android:minHeight="@dimen/widget_height"
