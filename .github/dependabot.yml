@@ -3,13 +3,13 @@ updates:
 - package-ecosystem: gradle
   directory: "/10-bitClockWidget"
   schedule:
-    interval: weekly
+    interval: monthly
     time: "23:30"
   open-pull-requests-limit: 10
 - package-ecosystem: bundler
   directory: "/"
   schedule:
-    interval: weekly
+    interval: monthly
     time: "23:30"
   open-pull-requests-limit: 10
   ignore:
