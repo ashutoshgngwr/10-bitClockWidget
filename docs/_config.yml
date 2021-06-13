@@ -18,7 +18,6 @@ exclude:
 # Markdown rendering
 markdown: kramdown
 
-baseurl: /10-bitClockWidget
 permalink: /:path
 
 ############################
