@@ -3,12 +3,11 @@ layout: page
 title: Privacy Policy
 ---
 
-## Privacy Policy
+# {{ page.title }}
 
 10-bit Clock Widget Android app does not collect any data from its users.
 
-10-bit Clock Widget website
+Furthermore, 10-bit Clock Widget website
 ([`ashutoshgngwr.github.io/10-bitClockWidget`](https://ashutoshgngwr.github.io/10-bitClockWidget))
-collects visitor data using [GoatCounter.com](https://www.goatcounter.com).
-Please refer to its [privacy policy](https://www.goatcounter.com/privacy) on
-data collection.
+collects visitor data. Please see its [privacy
+policy](https://ashutoshgngwr.github.io/privacy) for further information.
