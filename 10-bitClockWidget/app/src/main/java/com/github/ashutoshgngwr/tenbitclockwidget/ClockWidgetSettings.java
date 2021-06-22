@@ -50,12 +50,20 @@ class ClockWidgetSettings {
 		return getPreferences().getBoolean("6bits_hour", false);
 	}
 
-	static int getClockAMColor() {
+	static int getClockAMOnColor() {
 		return getPreferences().getInt("am_color", 0);
 	}
 
-	static int getClockPMColor() {
+	static int getClockAMOffColor() {
+		return getPreferences().getInt("am_off_color", 0);
+	}
+
+	static int getClockPMOnColor() {
 		return getPreferences().getInt("pm_color", 0);
+	}
+
+	static int getClockPMOffColor() {
+		return getPreferences().getInt("pm_off_color", 0);
 	}
 
 	static int getClockBackgroundColor() {

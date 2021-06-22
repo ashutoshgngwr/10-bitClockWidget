@@ -24,17 +24,19 @@
   <string name="dot_size">Dot size</string>
   <string name="display_separator">Display separator</string>
   <string name="summary_display_separator">Display a line separating hours and minutes.</string>
-  <string name="am_time_color">Dot color</string>
-  <string name="pm_time_color">Alternate dot color</string>
+  <string name="am_time_color">Dot color (on bit)</string>
+  <string name="am_time_off_color">Dot color (off bit)</string>
+  <string name="pm_time_color">Alternate dot color (on bit)</string>
+  <string name="pm_time_off_color">Alternate dot color (off bit)</string>
   <string name="summary_pm_time_color">Color used post midday to distinguish between AM and PM time.</string>
   <string name="clock_background_color">Background color</string>
   <string name="service_notification__description">Background service is running to update the clock widget. Long press to hide this notification forever!</string>
   <string name="notification_channel_default__name">Clock Update Service</string>
   <string name="notification_channel_default__description">Notifications to keep the background service alive for updating the clock. You may disable notifications from this channel permanently.</string>
   <string name="twenty_four_hour_format">Use 24-hour format</string>
-  <string name="summary_twenty_four_hour_format">The widget will need at least 11 bits on enabling 24-hour format.</string>
-  <string name="six_bits_hour">Use 6 bits for hour</string>
-  <string name="summary_six_bits_hour">To fill empty space, the widget will use 6 bits to represent hour instead of 5.</string>
+  <string name="summary_twenty_four_hour_format">The widget will need at least 11 dots on enabling 24-hour format.</string>
+  <string name="six_bits_hour">Use 6 dots for hour</string>
+  <string name="summary_six_bits_hour">To fill empty space, the widget will use 6 dots to represent hour instead of 5.</string>
   <string name="about_page_url">file:///android_asset/about.html</string>
   <string name="help_page_url">file:///android_asset/help.html</string>
 </resources>

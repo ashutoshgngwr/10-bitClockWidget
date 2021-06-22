@@ -43,17 +43,34 @@
       app:title="@string/six_bits_hour" />
 
     <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
+      alphaSlider="true"
       app:defaultValue="#FF0F0F0F"
       app:iconSpaceReserved="false"
       app:key="am_color"
       app:title="@string/am_time_color" />
 
     <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
+      alphaSlider="true"
+      app:defaultValue="#770F0F0F"
+      app:iconSpaceReserved="false"
+      app:key="am_off_color"
+      app:title="@string/am_time_off_color" />
+
+    <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
+      alphaSlider="true"
       app:defaultValue="#FFFCFCFC"
       app:iconSpaceReserved="false"
       app:key="pm_color"
       app:summary="@string/summary_pm_time_color"
       app:title="@string/pm_time_color" />
+
+    <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
+      alphaSlider="true"
+      app:defaultValue="#77FCFCFC"
+      app:iconSpaceReserved="false"
+      app:key="pm_off_color"
+      app:summary="@string/summary_pm_time_color"
+      app:title="@string/pm_time_off_color" />
 
     <com.github.ashutoshgngwr.tenbitclockwidget.ColorPickerPreference
       alphaSlider="true"
