@@ -76,6 +76,10 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
 				assert pmColor != null;
 				pmColor.setEnabled(!isTFEnabled);
 
+				Preference pmOffColor = findPreference("pm_off_color");
+				assert pmOffColor != null;
+				pmOffColor.setEnabled(!isTFEnabled);
+
 				Preference sixBitsHour = findPreference("6bits_hour");
 				assert sixBitsHour != null;
 				sixBitsHour.setEnabled(isTFEnabled);

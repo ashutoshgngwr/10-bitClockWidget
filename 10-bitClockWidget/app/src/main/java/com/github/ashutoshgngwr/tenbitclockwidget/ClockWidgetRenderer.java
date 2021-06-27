@@ -57,10 +57,15 @@ class ClockWidgetRenderer {
 		clearClockBitmap();
 
 		Calendar calendar = Calendar.getInstance();
-		final boolean is24Hour = ClockWidgetSettings.shouldUse24HourFormat() || calendar.get(Calendar.AM_PM) == Calendar.AM;
+		final boolean is24Hour = ClockWidgetSettings.shouldUse24HourFormat();
 		final int nHourBits = is24Hour ? ClockWidgetSettings.shouldUse6bitsForHour() ? 6 : 5 : 4;
 		final int hour = calendar.get(is24Hour ? Calendar.HOUR_OF_DAY : Calendar.HOUR);
 		final int minute = calendar.get(Calendar.MINUTE);
+		final int onBitColor = is24Hour || calendar.get(Calendar.AM_PM) == Calendar.AM
+			? ClockWidgetSettings.getClockAMOnColor() : ClockWidgetSettings.getClockPMOnColor();
+
+		final int offBitColor = is24Hour || calendar.get(Calendar.AM_PM) == Calendar.AM
+			? ClockWidgetSettings.getClockAMOffColor() : ClockWidgetSettings.getClockPMOffColor();
 
 		final float sx = width * (is24Hour ? 0.5f : 0.4f);
 		final float sp = px(5);
@@ -70,10 +75,10 @@ class ClockWidgetRenderer {
 		canvas.drawRoundRect(new RectF(0, 0, width, height), px(5), px(5), mPaint);
 
 		RectF bounds = new RectF(padding, padding, sx - sp, height - padding);
-		renderBits(is24Hour, bounds, 2, is24Hour ? 3 : 2, nHourBits, hour);
+		renderBits(onBitColor, offBitColor, bounds, 2, is24Hour ? 3 : 2, nHourBits, hour);
 
 		bounds.set(sx + sp, padding, width - padding, height - padding);
-		renderBits(is24Hour, bounds, 2, 3, 6, minute);
+		renderBits(onBitColor, offBitColor, bounds, 2, 3, 6, minute);
 
 		if (ClockWidgetSettings.shouldDisplaySeparator()) {
 			mPaint.setAlpha(SEPARATOR_LINE_ALPHA);
@@ -84,7 +89,7 @@ class ClockWidgetRenderer {
 	}
 
 	@SuppressWarnings("SameParameterValue")
-	private void renderBits(boolean is24Hour, RectF bounds, int rows, int cols, int nBits, int bits) {
+	private void renderBits(int onColor, int offColor, RectF bounds, int rows, int cols, int nBits, int bits) {
 		final float dr = px(ClockWidgetSettings.getDotSize());
 		final float cw = bounds.width() / cols;
 		final float ch = bounds.height() / rows;
@@ -100,13 +105,9 @@ class ClockWidgetRenderer {
 				}
 
 				if ((bits >> ((i * cols) + j) & 1) == 1) {
-					mPaint.setColor(
-						is24Hour ? ClockWidgetSettings.getClockAMOnColor() : ClockWidgetSettings.getClockPMOnColor()
-					);
+					mPaint.setColor(onColor);
 				} else {
-					mPaint.setColor(
-						is24Hour ? ClockWidgetSettings.getClockAMOffColor() : ClockWidgetSettings.getClockPMOffColor()
-					);
+					mPaint.setColor(offColor);
 				}
 
 				canvas.drawCircle(x - cpx - dr, y - cpy - dr, dr, mPaint);
