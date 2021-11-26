@@ -1,0 +1,45 @@
+<!--
+  ~     Copyright (C) 2017  Ashutosh Gangwar
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="width=device-width" name="viewport" />
+    <style>
+      body {
+        margin: 0;
+        padding: 10px;
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+    <title>Довідка</title>
+  </head>
+  <body>
+    <p>
+      10-бітний віджет годинника використовує 10 двійкових крапок і їхній
+      колір для представлення поточного часу в 12-годинному форматі. На
+      наступному зображенні перші 4 крапки (перед роздільником) відображають
+      годину (0-11), інші 6 крапок відображають хвилини (0-59), а колір цих
+      крапок позначає ранок/вечір, як визначено в налаштуваннях віджета.
+      Крім того, тьмяні крапки мають значення 0, а яскраві — 1, тому на
+      наступному зображенні перші 4 крапки означають 1010 (10), а інші
+      6 крапок означають 010011 (19).
+    </p>
+    <img src="file:///android_asset/widget_info.png" />
+  </body>
+</html>

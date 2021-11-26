@@ -1,0 +1,42 @@
+<!--
+  ~     Copyright (C) 2017  Ashutosh Gangwar
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+  <string name="app_name">10-бітний віджет годинника</string>
+  <string name="appearance">Вигляд</string>
+  <string name="extras">Інше</string>
+  <string name="help">Довідка</string>
+  <string name="about">Про…</string>
+  <string name="dot_size">Розмір крапок</string>
+  <string name="display_separator">Відображати роздільник</string>
+  <string name="summary_display_separator">Відображати риску, що розділює години і хвилини.</string>
+  <string name="am_time_color">Колір крапки (акт. біт)</string>
+  <string name="am_time_off_color">Колір крапки (пас. біт)</string>
+  <string name="pm_time_color">Альтернативний колір крапки (акт. біт)</string>
+  <string name="pm_time_off_color">Альтернативний колір крапки (пас. біт)</string>
+  <string name="summary_pm_time_color">Колір використовується після обіду, щоб розрізняти час ранку і вечора.</string>
+  <string name="clock_background_color">Колір тла</string>
+  <string name="service_notification__description">Для оновлення годинника працює фонова служба. Довге натискання приховає це сповіщення назавжди!</string>
+  <string name="notification_channel_default__name">Служба оновлення годинника</string>
+  <string name="notification_channel_default__description">Сповіщення для підтримки фонової служби оновлення годинника. Ви можете вимкнути сповіщення цього каналу назавжди.</string>
+  <string name="twenty_four_hour_format">Викор. 24-годинний формат</string>
+  <string name="summary_twenty_four_hour_format">Віджету потрібно 11 крапок для ввімкнення 24-годинного формату.</string>
+  <string name="six_bits_hour">Викор. 6 крапок для години</string>
+  <string name="summary_six_bits_hour">Щоб заповнити порожній простір, віджет використовуватиме 6 крапок для позначення години, замість 5.</string>
+  <string name="about_page_url">file:///android_asset/about-uk.html</string>
+  <string name="help_page_url">file:///android_asset/help-uk.html</string>
+</resources>
