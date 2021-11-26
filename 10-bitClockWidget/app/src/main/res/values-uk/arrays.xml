@@ -21,9 +21,4 @@
     <item>Середній</item>
     <item>Великий</item>
   </string-array>
-  <string-array name="pref_dot_size_values">
-    <item>8</item>
-    <item>10</item>
-    <item>12</item>
-  </string-array>
 </resources>

@@ -21,7 +21,7 @@
     <item>Medium</item>
     <item>Large</item>
   </string-array>
-  <string-array name="pref_dot_size_values">
+  <string-array name="pref_dot_size_values" translatable="false">
     <item>8</item>
     <item>10</item>
     <item>12</item>

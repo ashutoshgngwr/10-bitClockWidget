@@ -37,6 +37,6 @@
   <string name="summary_twenty_four_hour_format">Віджету потрібно 11 крапок для ввімкнення 24-годинного формату.</string>
   <string name="six_bits_hour">Викор. 6 крапок для години</string>
   <string name="summary_six_bits_hour">Щоб заповнити порожній простір, віджет використовуватиме 6 крапок для позначення години, замість 5.</string>
-  <string name="about_page_url">file:///android_asset/about.html</string>
-  <string name="help_page_url">file:///android_asset/help.html</string>
+  <string name="about_page_url">file:///android_asset/about-uk.html</string>
+  <string name="help_page_url">file:///android_asset/help-uk.html</string>
 </resources>
