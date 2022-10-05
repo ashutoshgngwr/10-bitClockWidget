@@ -30,24 +30,20 @@ import androidx.preference.PreferenceFragmentCompat;
 public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
 	implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-	private final Preference.OnPreferenceClickListener extrasPreferenceClickListener
-		= new Preference.OnPreferenceClickListener() {
-		@Override
-		public boolean onPreferenceClick(Preference preference) {
-			Intent activityIntent = new Intent(getActivity(), WebViewExtrasActivity.class);
+	private final Preference.OnPreferenceClickListener extrasPreferenceClickListener = preference -> {
+		Intent activityIntent = new Intent(getActivity(), WebViewExtrasActivity.class);
 
-			switch (preference.getKey()) {
-				case "about":
-					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_URL_STRING_ID, R.string.about_page_url);
-					break;
-				case "help":
-					activityIntent.putExtra(WebViewExtrasActivity.EXTRA_URL_STRING_ID, R.string.help_page_url);
-					break;
-			}
-
-			startActivity(activityIntent);
-			return true;
+		switch (preference.getKey()) {
+			case "about":
+				activityIntent.putExtra(WebViewExtrasActivity.EXTRA_URL_STRING_ID, R.string.about_page_url);
+				break;
+			case "help":
+				activityIntent.putExtra(WebViewExtrasActivity.EXTRA_URL_STRING_ID, R.string.help_page_url);
+				break;
 		}
+
+		startActivity(activityIntent);
+		return true;
 	};
 
 	@Override
@@ -68,23 +64,20 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
 
 		CheckBoxPreference tfHourFormat = findPreference("24hour_format");
 		assert tfHourFormat != null;
-		tfHourFormat.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				boolean isTFEnabled = (Boolean) newValue;
-				Preference pmColor = findPreference("pm_color");
-				assert pmColor != null;
-				pmColor.setEnabled(!isTFEnabled);
+		tfHourFormat.setOnPreferenceChangeListener((preference, newValue) -> {
+			boolean isTFEnabled = (Boolean) newValue;
+			Preference pmColor = findPreference("pm_color");
+			assert pmColor != null;
+			pmColor.setEnabled(!isTFEnabled);
 
-				Preference pmOffColor = findPreference("pm_off_color");
-				assert pmOffColor != null;
-				pmOffColor.setEnabled(!isTFEnabled);
+			Preference pmOffColor = findPreference("pm_off_color");
+			assert pmOffColor != null;
+			pmOffColor.setEnabled(!isTFEnabled);
 
-				Preference sixBitsHour = findPreference("6bits_hour");
-				assert sixBitsHour != null;
-				sixBitsHour.setEnabled(isTFEnabled);
-				return true;
-			}
+			Preference sixBitsHour = findPreference("6bits_hour");
+			assert sixBitsHour != null;
+			sixBitsHour.setEnabled(isTFEnabled);
+			return true;
 		});
 
 		tfHourFormat.callChangeListener(tfHourFormat.isChecked());
@@ -102,12 +95,18 @@ public class ClockWidgetPreferenceFragment extends PreferenceFragmentCompat
 	@Override
 	public void onResume() {
 		super.onResume();
-		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		final SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
+		if (prefs != null) {
+			prefs.registerOnSharedPreferenceChangeListener(this);
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+		final SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
+		if (prefs != null) {
+			prefs.unregisterOnSharedPreferenceChangeListener(this);
+		}
 	}
 }
