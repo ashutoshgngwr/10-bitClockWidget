@@ -1,0 +1,1 @@
+Make clock widget updates compliant with latest background processing restrictions in Android.
