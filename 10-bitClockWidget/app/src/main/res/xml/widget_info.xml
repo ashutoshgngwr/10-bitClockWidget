@@ -23,4 +23,4 @@
   android:minResizeHeight="@dimen/widget_height"
   android:previewImage="@drawable/preview"
   android:resizeMode="horizontal|vertical"
-  android:updatePeriodMillis="0" />
+  android:updatePeriodMillis="1800000" />

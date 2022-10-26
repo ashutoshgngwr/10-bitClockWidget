@@ -17,11 +17,9 @@
 
 package com.github.ashutoshgngwr.tenbitclockwidget;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class ClockWidgetPreferenceActivity extends AppCompatActivity {
 
@@ -39,11 +37,8 @@ public class ClockWidgetPreferenceActivity extends AppCompatActivity {
 
 	@Override
 	protected void onStop() {
-		super.onStop();
-
 		// PreferenceActivity is no longer in foreground. Update widget!
-		LocalBroadcastManager
-			.getInstance(this)
-			.sendBroadcast(new Intent(ClockWidgetProvider.ACTION_UPDATE_CLOCK));
+		sendBroadcast(ClockWidgetProvider.createUpdateBroadcastIntent(this, null));
+		super.onStop();
 	}
 }
