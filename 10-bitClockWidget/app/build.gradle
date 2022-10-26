@@ -18,13 +18,13 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 32
+  compileSdkVersion 33
 
   defaultConfig {
     namespace "com.github.ashutoshgngwr.tenbitclockwidget"
     applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
     minSdkVersion 14
-    targetSdkVersion 32
+    targetSdkVersion 33
     versionCode 212
     versionName "2.1-2"
   }
