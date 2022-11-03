@@ -16,7 +16,7 @@ class ClockWidgetRenderer {
 
 	private static final String TAG = ClockWidgetRenderer.class.getSimpleName();
 
-	private static final int SEPARATOR_LINE_ALPHA = 0x70;
+	private static final int SEPARATOR_LINE_ALPHA = 0x75;
 
 	private static ClockWidgetRenderer mInstance;
 
@@ -31,8 +31,6 @@ class ClockWidgetRenderer {
 		clockBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		canvas = new Canvas(clockBitmap);
 		mPaint = new Paint();
-		mPaint.setAntiAlias(true);
-		mPaint.setStyle(Paint.Style.FILL);
 	}
 
 	static Bitmap renderBitmap() {
@@ -52,9 +50,16 @@ class ClockWidgetRenderer {
 		clockBitmap.eraseColor(Color.TRANSPARENT);
 	}
 
+	private void resetPaint() {
+		mPaint.reset();
+		mPaint.setAntiAlias(true);
+		mPaint.setStyle(Paint.Style.FILL);
+	}
+
 	private Bitmap render() {
 		// clear and reuse previously allocated bitmap
 		clearClockBitmap();
+		resetPaint();
 
 		Calendar calendar = Calendar.getInstance();
 		final boolean is24Hour = ClockWidgetSettings.shouldUse24HourFormat();
@@ -81,7 +86,9 @@ class ClockWidgetRenderer {
 		renderBits(onBitColor, offBitColor, bounds, 2, 3, 6, minute);
 
 		if (ClockWidgetSettings.shouldDisplaySeparator()) {
+			mPaint.setColor(onBitColor);
 			mPaint.setAlpha(SEPARATOR_LINE_ALPHA);
+			mPaint.setStrokeWidth(px(1));
 			canvas.drawLine(sx, height * 0.35f, sx, height * 0.65f, mPaint);
 		}
 
