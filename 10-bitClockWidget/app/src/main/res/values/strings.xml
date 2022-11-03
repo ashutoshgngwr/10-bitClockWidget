@@ -30,9 +30,6 @@
   <string name="pm_time_off_color">Alternate dot color (off bit)</string>
   <string name="summary_pm_time_color">Color used post midday to distinguish between AM and PM time.</string>
   <string name="clock_background_color">Background color</string>
-  <string name="service_notification__description">Background service is running to update the clock widget. Long press to hide this notification forever!</string>
-  <string name="notification_channel_default__name">Clock Update Service</string>
-  <string name="notification_channel_default__description">Notifications to keep the background service alive for updating the clock. You may disable notifications from this channel permanently.</string>
   <string name="twenty_four_hour_format">Use 24-hour format</string>
   <string name="summary_twenty_four_hour_format">The widget will need at least 11 dots on enabling 24-hour format.</string>
   <string name="six_bits_hour">Use 6 dots for hour</string>

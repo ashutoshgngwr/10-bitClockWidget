@@ -28,9 +28,6 @@
   <string name="pm_time_color">Alternatif nokta rengi</string>
   <string name="summary_pm_time_color">Öğleden önce ve sonrayı ayırt etmek için öğleden sonra kullanılacak renk.</string>
   <string name="clock_background_color">Arka plan rengi</string>
-  <string name="service_notification__description">Saati güncel tutmak için arka plan hizmeti çalışıyor. Bildirimi sonsuza dek kapatmak için bu bildirime uzun basın!</string>
-  <string name="notification_channel_default__name">Saat Güncelleme Hizmeti</string>
-  <string name="notification_channel_default__description">Saati güncel tutmak adına arka plan hizmetinin çalışmasını sağlamak için bildirim. Bildirimleri buradan kalıcı olarak devre dışı bırakabilirsiniz.</string>
   <string name="twenty_four_hour_format">24 saat düzenini kullan</string>
   <string name="summary_twenty_four_hour_format">Araç 24 saat düzenini kullanabilmek için en az 11 bit kullanmalıdır.</string>
   <string name="six_bits_hour">Saat için 6 bit kullan</string>

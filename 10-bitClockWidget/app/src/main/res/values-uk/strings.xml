@@ -30,9 +30,6 @@
   <string name="pm_time_off_color">Альтернативний колір крапки (пас. біт)</string>
   <string name="summary_pm_time_color">Колір використовується після обіду, щоб розрізняти час ранку і вечора.</string>
   <string name="clock_background_color">Колір тла</string>
-  <string name="service_notification__description">Для оновлення годинника працює фонова служба. Довге натискання приховає це сповіщення назавжди!</string>
-  <string name="notification_channel_default__name">Служба оновлення годинника</string>
-  <string name="notification_channel_default__description">Сповіщення для підтримки фонової служби оновлення годинника. Ви можете вимкнути сповіщення цього каналу назавжди.</string>
   <string name="twenty_four_hour_format">Викор. 24-годинний формат</string>
   <string name="summary_twenty_four_hour_format">Віджету потрібно 11 крапок для ввімкнення 24-годинного формату.</string>
   <string name="six_bits_hour">Викор. 6 крапок для години</string>
