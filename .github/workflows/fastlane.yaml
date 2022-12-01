@@ -1,0 +1,27 @@
+name: Fastlane
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "**"
+    paths:
+      - "fastlane/**"
+      - ".github/workflows/fastlane.yaml"
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "fastlane/**"
+      - ".github/workflows/fastlane.yaml"
+
+jobs:
+  validate-metadata:
+    name: Validate Metadata
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ashutoshgngwr/validate-fastlane-supply-metadata@v2
+        with:
+          usePlayStoreLocales: true

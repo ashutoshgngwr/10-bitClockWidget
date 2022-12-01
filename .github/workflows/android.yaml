@@ -7,11 +7,13 @@ on:
       - "**"
     paths:
       - "10-bitClockWidget/**"
+      - ".github/workflows/android.yaml"
   pull_request:
     branches:
       - master
     paths:
       - "10-bitClockWidget/**"
+      - ".github/workflows/android.yaml"
 
 env:
   JAVA_VERSION: 11

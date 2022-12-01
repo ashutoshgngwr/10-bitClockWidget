@@ -1,18 +1,23 @@
 version: 2
 updates:
-- package-ecosystem: gradle
-  directory: "/10-bitClockWidget"
-  schedule:
-    interval: monthly
-    time: "23:30"
-  open-pull-requests-limit: 10
-- package-ecosystem: bundler
-  directory: "/"
-  schedule:
-    interval: monthly
-    time: "23:30"
-  open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: fastlane
-    versions:
-    - 2.178.0
+  - package-ecosystem: gradle
+    directory: "/10-bitClockWidget"
+    schedule:
+      interval: monthly
+      time: "23:30"
+    open-pull-requests-limit: 10
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: monthly
+      time: "23:30"
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: fastlane
+        versions:
+          - 2.178.0
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 10
