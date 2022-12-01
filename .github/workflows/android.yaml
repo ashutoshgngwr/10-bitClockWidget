@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
           distribution: adopt
           java-version: ${{ env.JAVA_VERSION }}
@@ -43,7 +43,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
           distribution: adopt
           java-version: ${{ env.JAVA_VERSION }}
