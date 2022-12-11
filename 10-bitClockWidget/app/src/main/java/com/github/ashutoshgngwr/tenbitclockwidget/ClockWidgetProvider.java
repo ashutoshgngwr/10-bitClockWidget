@@ -30,6 +30,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.AlarmManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
@@ -87,7 +88,11 @@ public class ClockWidgetProvider extends AppWidgetProvider {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.SECOND, 0);
 		calendar.add(Calendar.MINUTE, 1);
-		mAlarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), createUpdateBroadcastPendingIntent(context, widgetIds));
+		AlarmManagerCompat.setExact(
+			mAlarmManager,
+			AlarmManager.RTC,
+			calendar.getTimeInMillis(),
+			createUpdateBroadcastPendingIntent(context, widgetIds));
 	}
 
 	// Creates PendingIntent for default activity of default alarm clock application
