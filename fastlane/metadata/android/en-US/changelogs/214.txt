@@ -1,0 +1,1 @@
+Use exact system alarms to update widget at precise intervals.
