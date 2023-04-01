@@ -47,7 +47,7 @@ android {
 
 dependencies {
   // https://issuetracker.google.com/issues/238425626
-  api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+  api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
   implementation 'androidx.appcompat:appcompat:1.6.1'
   implementation 'androidx.preference:preference:1.2.0'
   implementation('com.github.GrenderG:Color-O-Matic:1.1.5') {
