@@ -16,7 +16,8 @@ on:
       - ".github/workflows/android.yaml"
 
 env:
-  JAVA_VERSION: 11
+  JDK_DISTRIBUTION: temurin
+  JAVA_VERSION: 17
 
 jobs:
   assemble:
@@ -27,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
         with:
-          distribution: adopt
+          distribution: ${{ env.JDK_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - run: ./10-bitClockWidget/gradlew -p ./10-bitClockWidget assembleDebug
 
@@ -45,7 +46,7 @@ jobs:
           ruby-version: 2.7
       - uses: actions/setup-java@v3
         with:
-          distribution: adopt
+          distribution: ${{ env.JDK_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
       - run: >-
           echo "$SERVICE_ACCOUNT_KEY" > service-account-key.json;
