@@ -19,8 +19,8 @@
   android:initialLayout="@layout/clock_widget_layout"
   android:minWidth="@dimen/widget_width"
   android:minHeight="@dimen/widget_height"
-  android:minResizeWidth="@dimen/widget_width"
-  android:minResizeHeight="@dimen/widget_height"
+  android:minResizeWidth="@dimen/widget_min_width"
+  android:minResizeHeight="@dimen/widget_min_height"
   android:previewImage="@drawable/preview"
   android:resizeMode="horizontal|vertical"
   android:updatePeriodMillis="1800000" />

@@ -22,7 +22,6 @@ class ClockWidgetRenderer {
 
 	private final int width = getDimen(R.dimen.widget_width);
 	private final int height = getDimen(R.dimen.widget_height);
-	private final int padding = px(10);
 	private final Paint mPaint;
 	private final Bitmap clockBitmap;
 	private final Canvas canvas;
@@ -79,10 +78,10 @@ class ClockWidgetRenderer {
 		mPaint.setColor(ClockWidgetSettings.getClockBackgroundColor());
 		canvas.drawRoundRect(new RectF(0, 0, width, height), px(5), px(5), mPaint);
 
-		RectF bounds = new RectF(padding, padding, sx - sp, height - padding);
+		RectF bounds = new RectF(0, 0, sx - sp, height);
 		renderBits(onBitColor, offBitColor, bounds, 2, is24Hour ? 3 : 2, nHourBits, hour);
 
-		bounds.set(sx + sp, padding, width - padding, height - padding);
+		bounds.set(sx + sp, 0, width, height);
 		renderBits(onBitColor, offBitColor, bounds, 2, 3, 6, minute);
 
 		if (ClockWidgetSettings.shouldDisplaySeparator()) {

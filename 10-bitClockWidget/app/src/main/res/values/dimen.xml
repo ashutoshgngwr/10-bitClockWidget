@@ -16,6 +16,8 @@
   -->
 
 <resources>
-  <dimen name="widget_height">105dp</dimen>
+  <dimen name="widget_height">90dp</dimen>
   <dimen name="widget_width">315dp</dimen>
+  <dimen name="widget_min_height">40dp</dimen>
+  <dimen name="widget_min_width">180dp</dimen>
 </resources>
