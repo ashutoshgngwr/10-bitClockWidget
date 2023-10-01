@@ -1,0 +1,1 @@
+- Allow resizing of widget to take 3x1 cell space on the home screen.
