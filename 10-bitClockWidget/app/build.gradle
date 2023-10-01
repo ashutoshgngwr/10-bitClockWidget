@@ -14,20 +14,22 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-apply plugin: 'com.android.application'
+plugins {
+  id 'com.android.application'
+}
 
 android {
-  compileSdkVersion 33
+  compileSdk 33
 
   defaultConfig {
     namespace "com.github.ashutoshgngwr.tenbitclockwidget"
     applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
-    minSdkVersion 14
-    targetSdkVersion 33
+    minSdk 14
+    targetSdk 33
     versionCode 214
     versionName "2.1-4"
   }
+
   buildTypes {
     release {
       debuggable false
@@ -46,8 +48,6 @@ android {
 }
 
 dependencies {
-  // https://issuetracker.google.com/issues/238425626
-  api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
   implementation 'androidx.appcompat:appcompat:1.6.1'
   implementation 'androidx.preference:preference:1.2.1'
   implementation('com.github.GrenderG:Color-O-Matic:1.1.5') {
