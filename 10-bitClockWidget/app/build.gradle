@@ -26,8 +26,8 @@ android {
     applicationId "com.github.ashutoshgngwr.tenbitclockwidget"
     minSdk 14
     targetSdk 33
-    versionCode 220
-    versionName "2.2"
+    versionCode 221
+    versionName "2.2-1"
   }
 
   buildTypes {
