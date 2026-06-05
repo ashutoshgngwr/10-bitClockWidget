@@ -19,6 +19,8 @@ package com.github.ashutoshgngwr.tenbitclockwidget;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.ActivityNotFoundException;
+import android.widget.Toast;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -60,7 +62,11 @@ public class WebViewExtrasActivity extends AppCompatActivity {
 				@Override
 				public boolean shouldOverrideUrlLoading(WebView view, String url) {
 					if (url.startsWith("http")) {
-						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+						try {
+							startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+						} catch (ActivityNotFoundException e) {
+							Toast.makeText(view.getContext(), "No app found to open this link", Toast.LENGTH_SHORT).show();
+						}
 						return true;
 					}
 
